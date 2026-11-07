@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://ntkr54vda652"]
+
+[ext_resource type="Script" uid="uid://bd74i4aa3swdw" path="res://main/locations/location.gd" id="1_rethr"]
+[ext_resource type="Script" uid="uid://de2p7m1imbxkr" path="res://main/features/feature.gd" id="2_gk7iq"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_aajxx"]
+source_geometry_mode = 2
+source_geometry_group_name = &"location_nav_geometry"
+
+[node name="Location" type="Node2D" unique_id=1456950036 node_paths=PackedStringArray("nav_region", "ground_map", "data_map", "character_root", "prop_root", "feature_root")]
+script = ExtResource("1_rethr")
+nav_region = NodePath("NavigationRegion2D")
+ground_map = NodePath("NavigationRegion2D/GroundMapLayer")
+data_map = NodePath("NavigationRegion2D/DataMapLayer")
+character_root = NodePath("YSortRoot/CharacterRoot")
+prop_root = NodePath("YSortRoot/PropRoot")
+feature_root = NodePath("FeatureRoot")
+metadata/_custom_type_script = "uid://bd74i4aa3swdw"
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=734036063]
+navigation_polygon = SubResource("NavigationPolygon_aajxx")
+
+[node name="GroundMapLayer" type="TileMapLayer" parent="NavigationRegion2D" unique_id=171999508]
+
+[node name="DataMapLayer" type="TileMapLayer" parent="NavigationRegion2D" unique_id=1587713245]
+
+[node name="YSortRoot" type="Node2D" parent="." unique_id=583340654]
+y_sort_enabled = true
+
+[node name="CharacterRoot" type="Node2D" parent="YSortRoot" unique_id=2143445109]
+
+[node name="PropRoot" type="Node2D" parent="YSortRoot" unique_id=1221054963]
+
+[node name="FeatureRoot" type="Node2D" parent="." unique_id=391647655]
+
+[node name="Feature" type="Node2D" parent="FeatureRoot" unique_id=1957927056]
+script = ExtResource("2_gk7iq")
+feature_id = &"start_spawn"
+metadata/_custom_type_script = "uid://de2p7m1imbxkr"

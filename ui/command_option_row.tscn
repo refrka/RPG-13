@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://cm4kb6vlt4tue"]
+
+[ext_resource type="Script" uid="uid://bux07hvvsaked" path="res://ui/command_option_row.gd" id="1_gv5tp"]
+
+[node name="CommandOptionRow" type="HBoxContainer" unique_id=890587667 node_paths=PackedStringArray("key_line_edit", "value_line_edit", "value_type")]
+script = ExtResource("1_gv5tp")
+key_line_edit = NodePath("DataKeyLineEdit")
+value_line_edit = NodePath("DataValueLineEdit")
+value_type = NodePath("OptionButton")
+
+[node name="DataKeyLineEdit" type="LineEdit" parent="." unique_id=1227075076]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "key"
+caret_blink = true
+
+[node name="DataValueLineEdit" type="LineEdit" parent="." unique_id=440717704]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "value"
+caret_blink = true
+
+[node name="OptionButton" type="OptionButton" parent="." unique_id=2125226321]
+layout_mode = 2
+selected = 0
+item_count = 2
+popup/item_0/text = "INT"
+popup/item_0/id = 0
+popup/item_1/text = "STR"
+popup/item_1/id = 1

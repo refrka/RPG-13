@@ -1,0 +1,1 @@
+class_name GameReadyEvent extends SystemEvent

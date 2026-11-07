@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dnx1ucwubtesg"]
+
+[ext_resource type="Script" uid="uid://jwdb1vxj3v7n" path="res://main/entities/prop.gd" id="1_a73f3"]
+
+[node name="Prop" type="StaticBody2D" unique_id=215766784]
+script = ExtResource("1_a73f3")

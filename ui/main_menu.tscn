@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://bjkas7eq2d4el"]
+
+[ext_resource type="Script" uid="uid://b1f5rsiqlhw5w" path="res://ui/main_menu.gd" id="1_t7e0r"]
+
+[node name="MainMenu" type="MarginContainer" unique_id=2043232190 node_paths=PackedStringArray("start_button", "reset_button", "quit_button") groups=["main_menu"]]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_t7e0r")
+start_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/StartButton")
+reset_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/ResetButton")
+quit_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/QuitButton")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=2067997153]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_type_variation = &"MainMenuPanel"
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1781335815]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=346737049]
+layout_mode = 2
+
+[node name="StartButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1502646409]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+theme_type_variation = &"MainMenuButton"
+text = "Start"
+
+[node name="ResetButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1162181942]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+theme_type_variation = &"MainMenuButton"
+text = "Reset"
+
+[node name="QuitButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=212431207]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+theme_type_variation = &"MainMenuButton"
+text = "Quit"
