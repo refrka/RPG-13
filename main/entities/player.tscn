@@ -2,6 +2,66 @@
 
 [ext_resource type="PackedScene" uid="uid://c1xms1ap1cfk1" path="res://main/entities/character.tscn" id="1_ctsxe"]
 [ext_resource type="Script" uid="uid://cdo06f8y5kuk4" path="res://main/entities/player.gd" id="2_qpsve"]
+[ext_resource type="Script" uid="uid://uxncuvjdw2xo" path="res://main/entities/entity_def.gd" id="3_olhwn"]
+[ext_resource type="Script" uid="uid://mwr8xq4ovru2" path="res://main/inventory/inventory.gd" id="3_qvsdu"]
+[ext_resource type="Texture2D" uid="uid://b6jko3ix3gi2d" path="res://resources/textures/characters/player/player_sprite_sheet_texture.png" id="3_v2iwy"]
+[ext_resource type="Script" uid="uid://coq7lhqblk63i" path="res://main/component/player_movement_component.gd" id="4_k1fg7"]
+[ext_resource type="Script" uid="uid://bcc12dwtx8mm6" path="res://main/items/item_stack.gd" id="4_nlgl6"]
+[ext_resource type="Resource" uid="uid://drkd403jx6uee" path="res://main/items/consumables/apple.tres" id="5_rnx6y"]
+[ext_resource type="Resource" uid="uid://c61dy01aeo6v8" path="res://main/items/consumables/bread.tres" id="6_vbsf0"]
+
+[sub_resource type="Resource" id="Resource_s4iod"]
+script = ExtResource("4_nlgl6")
+item = ExtResource("5_rnx6y")
+count = 75
+metadata/_custom_type_script = "uid://bcc12dwtx8mm6"
+
+[sub_resource type="Resource" id="Resource_s5jlk"]
+script = ExtResource("4_nlgl6")
+item = ExtResource("6_vbsf0")
+count = 33
+metadata/_custom_type_script = "uid://bcc12dwtx8mm6"
+
+[sub_resource type="Resource" id="Resource_cpvfl"]
+script = ExtResource("3_qvsdu")
+stacks = Array[ExtResource("4_nlgl6")]([SubResource("Resource_s4iod"), SubResource("Resource_s5jlk")])
+metadata/_custom_type_script = "uid://mwr8xq4ovru2"
+
+[sub_resource type="Resource" id="Resource_sa71d"]
+script = ExtResource("3_olhwn")
+entity_id = &"player"
+initial_inventory = SubResource("Resource_cpvfl")
+metadata/_custom_type_script = "uid://uxncuvjdw2xo"
+
+[sub_resource type="Resource" id="Resource_vbsf0"]
+script = ExtResource("4_nlgl6")
+item = ExtResource("6_vbsf0")
+count = 33
+metadata/_custom_type_script = "uid://bcc12dwtx8mm6"
+
+[sub_resource type="Resource" id="Resource_rnx6y"]
+script = ExtResource("3_qvsdu")
+stacks = Array[ExtResource("4_nlgl6")]([SubResource("Resource_vbsf0")])
+metadata/_custom_type_script = "uid://mwr8xq4ovru2"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gk7iq"]
+size = Vector2(20, 10)
 
 [node name="Player" unique_id=1302027843 groups=["player"] instance=ExtResource("1_ctsxe")]
+collision_layer = 11
 script = ExtResource("2_qpsve")
+entity_def = SubResource("Resource_sa71d")
+inventory = SubResource("Resource_rnx6y")
+
+[node name="Sprite2D" parent="." index="0" unique_id=1809144018]
+texture = ExtResource("3_v2iwy")
+offset = Vector2(0, -24)
+hframes = 8
+vframes = 4
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=2142657413]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_gk7iq")
+
+[node name="PlayerMovementComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(1005418537) index="0" unique_id=2089594901]
+script = ExtResource("4_k1fg7")

@@ -22,10 +22,6 @@ func execute(_data:= {}) -> Result:
 
 		value = data.value
 
-	print("fuckkkk")
-
-	print(key, value)
-
 	Data.set_flag(key, value)
 
 	return Result.SUCCESS

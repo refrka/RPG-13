@@ -13,6 +13,8 @@ enum GameState {
 
 	CUTSCENE,
 
+	PAUSED,
+
 }
 
 
@@ -31,10 +33,13 @@ var player: Player:
 
 			player = load("res://main/entities/player.tscn").instantiate()
 
+			player.initialize()
+
 			add_child(player)
 
 		return player
 
+var pause_count:= 0
 
 
 
@@ -43,6 +48,8 @@ var player: Player:
 
 func _ready() -> void:
 
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	
 	if not Data.is_save_file_valid():
 
 		Data.create_new_save_data()
@@ -57,6 +64,8 @@ func _ready() -> void:
 
 func start() -> void:
 
+	Events.fire(GameStartingEvent)
+
 	Data.load_save_data()
 
 	set_game_state(GameState.ACTIVE)
@@ -66,6 +75,10 @@ func start() -> void:
 	Scenes.open_location(location)
 
 	location.spawn_player(Data.active_save_data.spawn_point_id)
+
+	Game.player.activate()
+
+	Events.fire(GameStartedEvent)
 
 
 
@@ -83,7 +96,11 @@ func quit() -> void:
 
 func exit() -> void:
 
+	Events.fire(GameExitingEvent)
+
 	set_game_state(GameState.MAIN_MENU)
+
+	Events.fire(GameExitedEvent)
 
 
 
@@ -101,6 +118,53 @@ func load_last() -> void:
 	Scenes.close_location()
 
 	start()
+
+
+
+
+
+
+func pause() -> void:
+
+	get_tree().paused = true
+
+	set_game_state(GameState.PAUSED)
+
+
+
+func unpause() -> void:
+
+	get_tree().paused = false
+
+	set_game_state(GameState.ACTIVE)
+
+
+
+
+func request_pause() -> void:
+
+	pause_count += 1
+
+	if pause_count > 0 and not is_paused():
+
+		pause()
+
+
+
+func request_unpause() -> void:
+
+	pause_count -= 1
+
+	if pause_count <= 0 and is_paused():
+
+		unpause()
+
+
+
+
+func is_paused() -> bool:
+
+	return get_tree().paused and game_state == GameState.PAUSED
 
 
 
@@ -126,6 +190,8 @@ func change_location(location_id: StringName, spawn_point_id: StringName) -> voi
 
 	location.spawn_player(spawn_point_id)
 
+	player.activate()
+
 
 
 func set_game_state(_game_state: GameState) -> void:
@@ -134,6 +200,13 @@ func set_game_state(_game_state: GameState) -> void:
 
 	game_state_changed.emit(game_state)
 
+
+
+
+
+func is_active() -> bool:
+
+	return game_state == GameState.ACTIVE
 
 
 

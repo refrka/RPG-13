@@ -28,8 +28,10 @@ navigation_polygon = SubResource("NavigationPolygon_aajxx")
 y_sort_enabled = true
 
 [node name="CharacterRoot" type="Node2D" parent="YSortRoot" unique_id=2143445109]
+y_sort_enabled = true
 
 [node name="PropRoot" type="Node2D" parent="YSortRoot" unique_id=1221054963]
+y_sort_enabled = true
 
 [node name="FeatureRoot" type="Node2D" parent="." unique_id=391647655]
 

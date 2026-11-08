@@ -11,6 +11,10 @@ var active_save_data: SaveData
 
 
 
+func _ready() -> void:
+
+	process_mode = Node.PROCESS_MODE_ALWAYS
+
 
 
 

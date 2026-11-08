@@ -1,8 +1,23 @@
 [gd_scene format=3 uid="uid://cfreff0brttj4"]
 
 [ext_resource type="PackedScene" uid="uid://ntkr54vda652" path="res://main/locations/location.tscn" id="1_eeo0c"]
+[ext_resource type="Script" uid="uid://dc13ymx1lufls" path="res://main/commands/command.gd" id="2_sa71d"]
+[ext_resource type="Script" uid="uid://crkvw1kw00fdo" path="res://main/conditions/condition.gd" id="3_5ee7x"]
+[ext_resource type="Script" uid="uid://nuqrfg7p1ie8" path="res://main/commands/print_command.gd" id="4_gp0mv"]
+[ext_resource type="Script" uid="uid://dn6i02yqh3ha6" path="res://main/commands/command_set.gd" id="5_n4wbm"]
+
+[sub_resource type="Resource" id="Resource_dbddf"]
+script = ExtResource("4_gp0mv")
+text = "Fuck"
+metadata/_custom_type_script = "uid://nuqrfg7p1ie8"
+
+[sub_resource type="Resource" id="Resource_kef0p"]
+script = ExtResource("5_n4wbm")
+commands = Array[ExtResource("2_sa71d")]([SubResource("Resource_dbddf")])
+metadata/_custom_type_script = "uid://dn6i02yqh3ha6"
 
 [node name="Forest1" unique_id=1456950036 instance=ExtResource("1_eeo0c")]
+open_command_set = SubResource("Resource_kef0p")
 
 [node name="Feature" parent="FeatureRoot" parent_id_path=PackedInt32Array(391647655) index="0" unique_id=1957927056]
-position = Vector2(1176, 110)
+position = Vector2(492, 75)

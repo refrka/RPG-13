@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bmv4vqsxv7fat"]
+
+[node name="ItemSlot" type="MarginContainer" unique_id=206591642]
+custom_minimum_size = Vector2(24, 24)
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1372718727]
+layout_mode = 2
+theme_type_variation = &"ItemSlotPanel"

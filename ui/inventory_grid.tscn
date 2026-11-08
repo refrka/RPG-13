@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://bawqfta0jhbw1"]
+
+[ext_resource type="Script" uid="uid://f6prfa44bw7r" path="res://ui/inventory_grid.gd" id="1_3fxdd"]
+[ext_resource type="PackedScene" uid="uid://bmv4vqsxv7fat" path="res://ui/item_slot.tscn" id="2_mwsbb"]
+
+[node name="InventoryGrid" type="GridContainer" unique_id=388392845]
+offset_right = 24.0
+offset_bottom = 24.0
+script = ExtResource("1_3fxdd")
+
+[node name="ItemSlot" parent="." unique_id=206591642 instance=ExtResource("2_mwsbb")]
+layout_mode = 2

@@ -4,9 +4,9 @@
 [ext_resource type="Script" uid="uid://c6w76b5n53o5f" path="res://main/config/input_config.gd" id="2_28aoi"]
 [ext_resource type="Script" uid="uid://bd74i4aa3swdw" path="res://main/locations/location.gd" id="2_pyidc"]
 [ext_resource type="PackedScene" uid="uid://bjkas7eq2d4el" path="res://ui/main_menu.tscn" id="3_vvh5c"]
-[ext_resource type="Script" uid="uid://b2wyot2wqs01q" path="res://ui/debug_screen.gd" id="5_jnlp7"]
-[ext_resource type="Script" uid="uid://coywretkqbvh3" path="res://ui/game_menu.gd" id="5_l8v81"]
-[ext_resource type="PackedScene" uid="uid://cm4kb6vlt4tue" path="res://ui/command_option_row.tscn" id="7_vyht1"]
+[ext_resource type="PackedScene" uid="uid://bp2l3wl1ep8jc" path="res://ui/profile_overlay.tscn" id="4_vyht1"]
+[ext_resource type="PackedScene" uid="uid://cq67bfaokqhs6" path="res://ui/game_menu.tscn" id="5_vyht1"]
+[ext_resource type="PackedScene" uid="uid://dqmjtv7papiqt" path="res://ui/debug_screen.tscn" id="6_l8v81"]
 
 [sub_resource type="Resource" id="Resource_aajxx"]
 script = ExtResource("2_28aoi")
@@ -16,12 +16,18 @@ metadata/_custom_type_script = "uid://c6w76b5n53o5f"
 [sub_resource type="Resource" id="Resource_bg5s2"]
 script = ExtResource("2_28aoi")
 game_state = 1
-allowed_actions = Array[StringName]([&"quicksave", &"debug", &"game_menu"])
+allowed_actions = Array[StringName]([&"quicksave", &"debug", &"game_menu", &"move_left", &"move_right", &"move_up", &"move_down", &"profile"])
+metadata/_custom_type_script = "uid://c6w76b5n53o5f"
+
+[sub_resource type="Resource" id="Resource_cpvfl"]
+script = ExtResource("2_28aoi")
+game_state = 3
+allowed_actions = Array[StringName]([&"game_menu", &"debug", &"profile"])
 metadata/_custom_type_script = "uid://c6w76b5n53o5f"
 
 [node name="Root" type="Node" unique_id=1437999846]
 script = ExtResource("1_pq8q7")
-input_configs = Array[ExtResource("2_28aoi")]([SubResource("Resource_aajxx"), SubResource("Resource_bg5s2")])
+input_configs = Array[ExtResource("2_28aoi")]([SubResource("Resource_aajxx"), SubResource("Resource_bg5s2"), SubResource("Resource_cpvfl")])
 
 [node name="BGCanvas" type="CanvasLayer" parent="." unique_id=1198601177]
 
@@ -77,6 +83,19 @@ metadata/_edit_use_anchors_ = true
 [node name="Location" type="Node2D" parent="WorldCanvas/WorldRoot" unique_id=293705955]
 script = ExtResource("2_pyidc")
 
+[node name="OverlayCanvas" type="CanvasLayer" parent="." unique_id=1361021598]
+
+[node name="OverlayRoot" type="Control" parent="OverlayCanvas" unique_id=110473599]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ProfileOverlay" parent="OverlayCanvas/OverlayRoot" unique_id=467597025 instance=ExtResource("4_vyht1")]
+layout_mode = 1
+
 [node name="MainMenuCanvas" type="CanvasLayer" parent="." unique_id=91570870]
 
 [node name="MainMenuRoot" type="Control" parent="MainMenuCanvas" unique_id=1748675590]
@@ -102,49 +121,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="GameMenu" type="MarginContainer" parent="GameMenuCanvas/GameMenuRoot" unique_id=567756149 node_paths=PackedStringArray("load_button", "exit_button", "quit_button") groups=["game_menu"]]
+[node name="GameMenu" parent="GameMenuCanvas/GameMenuRoot" unique_id=1502627655 instance=ExtResource("5_vyht1")]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-script = ExtResource("5_l8v81")
-load_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/Button")
-exit_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/Button2")
-quit_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/Button3")
-
-[node name="PanelContainer" type="PanelContainer" parent="GameMenuCanvas/GameMenuRoot/GameMenu" unique_id=1036262262]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="MarginContainer" type="MarginContainer" parent="GameMenuCanvas/GameMenuRoot/GameMenu/PanelContainer" unique_id=1247161041]
-layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
-
-[node name="VBoxContainer" type="VBoxContainer" parent="GameMenuCanvas/GameMenuRoot/GameMenu/PanelContainer/MarginContainer" unique_id=93162303]
-layout_mode = 2
-
-[node name="Button" type="Button" parent="GameMenuCanvas/GameMenuRoot/GameMenu/PanelContainer/MarginContainer/VBoxContainer" unique_id=869969458]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-text = "Load"
-
-[node name="Button2" type="Button" parent="GameMenuCanvas/GameMenuRoot/GameMenu/PanelContainer/MarginContainer/VBoxContainer" unique_id=2041491406]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-text = "Exit"
-
-[node name="Button3" type="Button" parent="GameMenuCanvas/GameMenuRoot/GameMenu/PanelContainer/MarginContainer/VBoxContainer" unique_id=662240352]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-text = "Quit"
 
 [node name="DebugCanvas" type="CanvasLayer" parent="." unique_id=1710596271]
 
@@ -157,80 +135,11 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="DebugScreen" type="MarginContainer" parent="DebugCanvas/DebugRoot" unique_id=957070928 node_paths=PackedStringArray("location_list", "data_list", "command_option_list", "add_value_button", "clear_button", "execute_command_button") groups=["debug_screen"]]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
-script = ExtResource("5_jnlp7")
-location_list = NodePath("VBoxContainer2/VBoxContainer")
-data_list = NodePath("VBoxContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/DataList")
-command_option_list = NodePath("VBoxContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/CommandOptionList")
-add_value_button = NodePath("VBoxContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/AddDataValueButton")
-clear_button = NodePath("VBoxContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ClearButton")
-execute_command_button = NodePath("VBoxContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ExecuteCommandButton")
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="DebugCanvas/DebugRoot/DebugScreen" unique_id=131361348]
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="MarginContainer" type="MarginContainer" parent="DebugCanvas/DebugRoot/DebugScreen/VBoxContainer2" unique_id=131014038]
-layout_mode = 2
-
-[node name="PanelContainer" type="PanelContainer" parent="DebugCanvas/DebugRoot/DebugScreen/VBoxContainer2/MarginContainer" unique_id=1907647647]
-layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="DebugCanvas/DebugRoot/DebugScreen/VBoxContainer2/MarginContainer/PanelContainer" unique_id=1243016278]
-layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
-
-[node name="VBoxContainer" type="VBoxContainer" parent="DebugCanvas/DebugRoot/DebugScreen/VBoxContainer2/MarginContainer/PanelContainer/MarginContainer" unique_id=546673726]
-layout_mode = 2
-
-[node name="CommandOptionList" type="OptionButton" parent="DebugCanvas/DebugRoot/DebugScreen/VBoxContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=2112965110]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="DebugCanvas/DebugRoot/DebugScreen/VBoxContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=432975691]
-layout_mode = 2
-text = "Data:"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="DebugCanvas/DebugRoot/DebugScreen/VBoxContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1422448003]
-layout_mode = 2
-
-[node name="AddDataValueButton" type="Button" parent="DebugCanvas/DebugRoot/DebugScreen/VBoxContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=154259316]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Add Value"
-
-[node name="ClearButton" type="Button" parent="DebugCanvas/DebugRoot/DebugScreen/VBoxContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=561375257]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Clear
-"
-
-[node name="DataList" type="VBoxContainer" parent="DebugCanvas/DebugRoot/DebugScreen/VBoxContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=890104717]
-layout_mode = 2
-
-[node name="CommandOptionRow" parent="DebugCanvas/DebugRoot/DebugScreen/VBoxContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/DataList" unique_id=890587667 instance=ExtResource("7_vyht1")]
-layout_mode = 2
-
-[node name="ExecuteCommandButton" type="Button" parent="DebugCanvas/DebugRoot/DebugScreen/VBoxContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1687976761]
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-text = "Execute"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="DebugCanvas/DebugRoot/DebugScreen/VBoxContainer2" unique_id=255758684]
-custom_minimum_size = Vector2(250, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
+[node name="DebugScreen" parent="DebugCanvas/DebugRoot" unique_id=1518081956 instance=ExtResource("6_l8v81")]
+visible = false
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1

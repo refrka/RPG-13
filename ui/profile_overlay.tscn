@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://bp2l3wl1ep8jc"]
+
+[ext_resource type="Script" uid="uid://bbmilkpu667pd" path="res://ui/profile_overlay.gd" id="1_e3pp2"]
+[ext_resource type="PackedScene" uid="uid://bawqfta0jhbw1" path="res://ui/inventory_grid.tscn" id="2_ihex5"]
+
+[node name="ProfileOverlay" type="MarginContainer" unique_id=467597025]
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 166.0
+grow_vertical = 2
+script = ExtResource("1_e3pp2")
+request_pause = true
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1430100171]
+custom_minimum_size = Vector2(166, 0)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=592121343]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=1122797789]
+layout_mode = 2
+
+[node name="InventoryGrid" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=388392845 instance=ExtResource("2_ihex5")]
+layout_mode = 2

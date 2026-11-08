@@ -11,3 +11,4 @@ func _ready() -> void:
 	Game.set_game_state(Game.GameState.MAIN_MENU)
 
 	Events.fire(GameReadyEvent)
+

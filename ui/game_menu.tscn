@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://cq67bfaokqhs6"]
+
+[ext_resource type="Script" uid="uid://coywretkqbvh3" path="res://ui/game_menu.gd" id="1_3ptas"]
+
+[node name="GameMenu" type="MarginContainer" unique_id=1502627655 node_paths=PackedStringArray("resume_button", "load_button", "exit_button", "quit_button") groups=["game_menu"]]
+process_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_3ptas")
+resume_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/ResumeButton")
+load_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/LoadButton")
+exit_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/ExitButton")
+quit_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/QuitButton")
+request_pause = true
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=872721712]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1141217534]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=1835206927]
+layout_mode = 2
+
+[node name="ResumeButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=586473795]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+text = "Resume"
+
+[node name="LoadButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=986858532]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+text = "Load"
+
+[node name="ExitButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1003170794]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+text = "Exit"
+
+[node name="QuitButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=760170116]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+text = "Quit"

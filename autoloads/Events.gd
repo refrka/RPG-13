@@ -7,6 +7,11 @@ var subscriptions: Dictionary[Script, Array]
 
 
 
+func _ready() -> void:
+
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	
+
 
 
 func subscribe(event_script: Script, callback: Callable) -> void:

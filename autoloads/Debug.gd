@@ -10,7 +10,10 @@ var command_option_registry: Array[Script]
 
 
 
+
 func _ready() -> void:
+
+	process_mode = Node.PROCESS_MODE_ALWAYS
 
 	debug_screen = get_tree().get_first_node_in_group("debug_screen")
 
@@ -21,6 +24,8 @@ func _ready() -> void:
 		button.text = location_id
 
 		debug_screen.location_list.add_child(button)
+
+		button.custom_minimum_size.y = 20.0
 
 		button.pressed.connect(_on_location_selected.bind(location_id))
 
@@ -53,7 +58,9 @@ func _ready() -> void:
 
 func _on_location_selected(location_id: StringName) -> void:
 
-	Game.change_location(location_id, "start_spawn")
+	if Game.is_active():
+
+		Game.change_location(location_id, "start_spawn")
 
 
 

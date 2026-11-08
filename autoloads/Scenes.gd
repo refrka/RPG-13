@@ -142,7 +142,6 @@ func load_location_scenes() -> void:
 
 
 
-
 func _on_game_state_changed(game_state: Game.GameState) -> void:
 
 	match game_state:

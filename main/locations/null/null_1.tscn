@@ -5,4 +5,4 @@
 [node name="Null1" unique_id=1456950036 instance=ExtResource("1_ow38u")]
 
 [node name="Feature" parent="FeatureRoot" parent_id_path=PackedInt32Array(391647655) index="0" unique_id=1957927056]
-position = Vector2(103, 103)
+position = Vector2(269, 218)

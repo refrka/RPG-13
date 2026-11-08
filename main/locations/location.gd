@@ -37,9 +37,17 @@ func initialize() -> void:
 
 		entity.initialize()
 
+		entity.location = self
+
+		Entities.add_active_entity(entity)
+
 	for entity in prop_root.get_children():
 
 		entity.initialize()
+
+		entity.location = self
+
+		Entities.add_active_entity(entity)
 
 	for feature in feature_root.get_children():
 
@@ -58,6 +66,8 @@ func open() -> void:
 		initialize()
 
 	for entity in character_root.get_children():
+
+		entity.generate_authored_id()
 
 		entity.activate()
 
@@ -83,9 +93,21 @@ func close() -> void:
 
 		entity.deactivate()
 
+		character_root.remove_child(entity)
+
+		entity.location = null
+
+		Entities.remove_active_entity(entity)
+
 	for entity in prop_root.get_children():
 
 		entity.deactivate()
+
+		prop_root.remove_child(entity)
+
+		entity.location = null
+
+		Entities.remove_active_entity(entity)
 
 	for feature in feature_root.get_children():
 
@@ -105,7 +127,11 @@ func spawn_player(spawn_point_id: StringName) -> void:
 
 		return
 
-	if not Game.player.get_parent() == character_root:
+	if Game.player.get_parent() == null:
+
+		character_root.add_child(Game.player)
+
+	elif not Game.player.get_parent() == character_root:
 
 		Game.player.reparent(character_root)
 
@@ -113,6 +139,27 @@ func spawn_player(spawn_point_id: StringName) -> void:
 
 	Data.active_save_data.spawn_point_id = spawn_point_id
 
+
+
+
+
+func add_entity(entity: Entity, target_position: Vector2) -> void:
+
+	var root: Node2D = null
+
+	if entity is Character:
+
+		root = character_root
+
+	elif entity is Prop:
+
+		root = prop_root
+
+	root.add_child(entity)
+
+	entity.global_position = target_position
+
+	entity.location = self
 
 
 

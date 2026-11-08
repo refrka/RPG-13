@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://dqmjtv7papiqt"]
+
+[ext_resource type="Script" uid="uid://b2wyot2wqs01q" path="res://ui/debug_screen.gd" id="1_j2fff"]
+[ext_resource type="PackedScene" uid="uid://cm4kb6vlt4tue" path="res://ui/command_option_row.tscn" id="2_csyun"]
+
+[node name="DebugScreen" type="MarginContainer" unique_id=1518081956 node_paths=PackedStringArray("location_list", "data_list", "command_option_list", "add_value_button", "clear_button", "execute_command_button") groups=["debug_screen"]]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+script = ExtResource("1_j2fff")
+location_list = NodePath("VBoxContainer2/VBoxContainer")
+data_list = NodePath("VBoxContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/DataList")
+command_option_list = NodePath("VBoxContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/CommandOptionList")
+add_value_button = NodePath("VBoxContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/AddDataValueButton")
+clear_button = NodePath("VBoxContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ClearButton")
+execute_command_button = NodePath("VBoxContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ExecuteCommandButton")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="." unique_id=332617889]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer2" unique_id=839100228]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer2/MarginContainer" unique_id=171740294]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer2/MarginContainer/PanelContainer" unique_id=721171297]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2/MarginContainer/PanelContainer/MarginContainer" unique_id=652654042]
+layout_mode = 2
+
+[node name="CommandOptionList" type="OptionButton" parent="VBoxContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=281191603]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=858015559]
+layout_mode = 2
+text = "Data:"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1777070691]
+layout_mode = 2
+
+[node name="AddDataValueButton" type="Button" parent="VBoxContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=332853697]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Add Value"
+
+[node name="ClearButton" type="Button" parent="VBoxContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=547532310]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Clear
+"
+
+[node name="DataList" type="VBoxContainer" parent="VBoxContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=133836428]
+layout_mode = 2
+
+[node name="CommandOptionRow" parent="VBoxContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/DataList" unique_id=890587667 instance=ExtResource("2_csyun")]
+layout_mode = 2
+
+[node name="ExecuteCommandButton" type="Button" parent="VBoxContainer2/MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1291116253]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+text = "Execute"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2" unique_id=716994525]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0

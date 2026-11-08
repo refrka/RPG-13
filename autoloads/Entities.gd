@@ -52,9 +52,15 @@ func remove_active_entity(entity: Entity) -> void:
 
 func register_entity(entity: Entity) -> void:
 
-	generate_unique_id(entity)
+	if entity.authored_id != -1:
 
-	entity_registry[entity.unique_id] = entity
+		entity.unique_id = entity.authored_id
+	
+	else:
+
+		generate_unique_id(entity)
+
+		entity_registry[entity.unique_id] = entity
 
 
 
