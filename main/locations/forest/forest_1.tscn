@@ -5,6 +5,8 @@
 [ext_resource type="Script" uid="uid://crkvw1kw00fdo" path="res://main/conditions/condition.gd" id="3_5ee7x"]
 [ext_resource type="Script" uid="uid://nuqrfg7p1ie8" path="res://main/commands/print_command.gd" id="4_gp0mv"]
 [ext_resource type="Script" uid="uid://dn6i02yqh3ha6" path="res://main/commands/command_set.gd" id="5_n4wbm"]
+[ext_resource type="PackedScene" uid="uid://dxa7ltuy5us1a" path="res://main/entities/props/furnishings/campfire.tscn" id="6_5ee7x"]
+[ext_resource type="Script" uid="uid://de2p7m1imbxkr" path="res://main/features/feature.gd" id="7_gp0mv"]
 
 [sub_resource type="Resource" id="Resource_dbddf"]
 script = ExtResource("4_gp0mv")
@@ -19,5 +21,14 @@ metadata/_custom_type_script = "uid://dn6i02yqh3ha6"
 [node name="Forest1" unique_id=1456950036 instance=ExtResource("1_eeo0c")]
 open_command_set = SubResource("Resource_kef0p")
 
+[node name="Campfire" parent="YSortRoot/PropRoot" parent_id_path=PackedInt32Array(1221054963) index="0" unique_id=215766784 instance=ExtResource("6_5ee7x")]
+position = Vector2(399, 69)
+
 [node name="Feature" parent="FeatureRoot" parent_id_path=PackedInt32Array(391647655) index="0" unique_id=1957927056]
-position = Vector2(492, 75)
+position = Vector2(246, 160)
+
+[node name="Feature2" type="Node2D" parent="FeatureRoot" parent_id_path=PackedInt32Array(391647655) index="1" unique_id=127189942]
+position = Vector2(423, 65)
+script = ExtResource("7_gp0mv")
+feature_id = &"campfire"
+metadata/_custom_type_script = "uid://de2p7m1imbxkr"

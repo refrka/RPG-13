@@ -78,8 +78,6 @@ func get_stacks_with_item(item: Item) -> Array:
 
 		if stack != null and stack.item == item:
 
-			print("found stack with ", stack.item.item_id)
-
 			_stacks.append(stack)
 
 	return _stacks
@@ -122,8 +120,6 @@ func merge_inventory(inventory: Inventory) -> void:
 
 					set_stack_index(empty_index, merged_stack)
 
-					merged_stack.clear()
-
 			else:
 
 				var remaining = merged_stack.count
@@ -157,4 +153,30 @@ func _on_item_stack_emptied(index: int) -> void:
 
 	set_stack_index(index, null)
 
-	stack.free()
+	if stack:
+
+		stack.free()
+
+
+
+
+
+
+
+
+
+
+
+
+
+func to_dict() -> Dictionary:
+
+	var dict = {}
+
+	dict["items"] = []
+
+	for stack in stacks:
+
+		dict.items.append(stack.to_dict())
+
+	return dict

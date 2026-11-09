@@ -1,8 +1,36 @@
 [gd_scene format=3 uid="uid://c1d7vei2oa2m5"]
 
 [ext_resource type="PackedScene" uid="uid://ntkr54vda652" path="res://main/locations/location.tscn" id="1_ow38u"]
+[ext_resource type="PackedScene" uid="uid://buqbfuphq14qa" path="res://main/features/transition_sensor.tscn" id="2_7fwqb"]
+[ext_resource type="PackedScene" uid="uid://cwxb1v6m0xr0a" path="res://main/entities/props/resources/leather_plant.tscn" id="2_im04f"]
+[ext_resource type="PackedScene" uid="uid://c6gr5s2pgtsx0" path="res://main/entities/props/resources/dimfruit_plant.tscn" id="3_l8aa4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_im04f"]
+size = Vector2(11, 152)
 
 [node name="Null1" unique_id=1456950036 instance=ExtResource("1_ow38u")]
 
+[node name="LeatherPlant" parent="YSortRoot/PropRoot" parent_id_path=PackedInt32Array(1221054963) index="0" unique_id=215766784 instance=ExtResource("2_im04f")]
+position = Vector2(308, 141)
+
+[node name="DimfruitPlant" parent="YSortRoot/PropRoot" parent_id_path=PackedInt32Array(1221054963) index="1" unique_id=838449346 instance=ExtResource("3_l8aa4")]
+position = Vector2(269, 119)
+
+[node name="DimfruitPlant2" parent="YSortRoot/PropRoot" parent_id_path=PackedInt32Array(1221054963) index="2" unique_id=188172483 instance=ExtResource("3_l8aa4")]
+position = Vector2(246, 126)
+
+[node name="DimfruitPlant3" parent="YSortRoot/PropRoot" parent_id_path=PackedInt32Array(1221054963) index="3" unique_id=577506133 instance=ExtResource("3_l8aa4")]
+position = Vector2(237, 113)
+
 [node name="Feature" parent="FeatureRoot" parent_id_path=PackedInt32Array(391647655) index="0" unique_id=1957927056]
 position = Vector2(269, 218)
+
+[node name="TransitionSensor" parent="FeatureRoot" parent_id_path=PackedInt32Array(391647655) index="1" unique_id=1346701615 instance=ExtResource("2_7fwqb")]
+location_id = &"museum/museum"
+spawn_point_id = &"start_spawn"
+
+[node name="CollisionShape2D" parent="FeatureRoot/TransitionSensor/Sensor" parent_id_path=PackedInt32Array(1346701615, 715008386) index="0" unique_id=25169364]
+position = Vector2(451.5, 166)
+shape = SubResource("RectangleShape2D_im04f")
+
+[editable path="FeatureRoot/TransitionSensor"]

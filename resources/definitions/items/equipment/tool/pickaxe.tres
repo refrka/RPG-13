@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Tool" format=3 uid="uid://y0tafv3ga800"]
+
+[ext_resource type="Script" uid="uid://dpk885p8d8pn5" path="res://main/items/tool.gd" id="1_egn5r"]
+
+[resource]
+script = ExtResource("1_egn5r")
+item_id = &"pickaxe"
+display_name = "Pickaxe"
+max_stack = 1
+metadata/_custom_type_script = "uid://dpk885p8d8pn5"

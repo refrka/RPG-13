@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://bb1h7facsrsdo"]
+
+[ext_resource type="Script" uid="uid://dofn50t5ps2jt" path="res://main/items/item.gd" id="1_cvros"]
+[ext_resource type="Texture2D" uid="uid://b51tpkvinqf4t" path="res://resources/textures/items/consumable/food/dimfruit_icon_texture.png" id="1_ngp30"]
+
+[resource]
+script = ExtResource("1_cvros")
+item_id = &"dimfruit"
+display_name = "Dimfruit"
+icon_texture = ExtResource("1_ngp30")
+metadata/_custom_type_script = "uid://dofn50t5ps2jt"

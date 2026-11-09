@@ -23,7 +23,7 @@ enum Result {
 
 var data: Dictionary
 
-
+var result: Result
 
 
 
@@ -58,6 +58,6 @@ func cancel() -> void:
 
 
 
-static func run(_data:= {}) -> Result:
+static func run(_data:= {}) -> Command:
 
-	return Result.SUCCESS
+	return null

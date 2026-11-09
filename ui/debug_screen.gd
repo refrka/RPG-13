@@ -16,6 +16,8 @@ class_name DebugScreen extends MarginContainer
 @export var execute_command_button: Button
 
 
+var current_command: Command
+
 
 
 func _ready() -> void:
@@ -57,7 +59,7 @@ func _on_execute_command_pressed() -> void:
 
 	var command_index = command_option_list.get_selected_id()
 
-	var command = Debug.command_option_registry[command_index].new()
+	current_command = Debug.command_option_registry[command_index].new()
 
 	var data:= {}
 
@@ -69,4 +71,4 @@ func _on_execute_command_pressed() -> void:
 
 			data[key] = row_data[key]
 
-	command.execute(data)
+	current_command.execute(data)

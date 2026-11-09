@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dnx1ucwubtesg" path="res://main/entities/prop.tscn" id="1_g53vf"]
 [ext_resource type="Script" uid="uid://uxncuvjdw2xo" path="res://main/entities/entity_def.gd" id="2_5ajby"]
 [ext_resource type="Texture2D" uid="uid://bjkrof12nmm56" path="res://resources/textures/props/containers/chest_sprite_texture.png" id="2_gmjd0"]
+[ext_resource type="Script" uid="uid://s7ubp4bqvtx" path="res://main/component/container_component.gd" id="4_si27c"]
 
 [sub_resource type="Resource" id="Resource_5uqga"]
 script = ExtResource("2_5ajby")
@@ -14,8 +15,6 @@ size = Vector2(16, 5)
 
 [node name="Chest1" unique_id=215766784 instance=ExtResource("1_g53vf")]
 collision_layer = 21
-authored_id = null
-disabled = null
 entity_def = SubResource("Resource_5uqga")
 
 [node name="Sprite2D" parent="." index="0" unique_id=1791172789]
@@ -25,3 +24,7 @@ offset = Vector2(0, -8)
 [node name="CollisionShape2D" parent="." index="1" unique_id=1929450902]
 position = Vector2(0, -2.5)
 shape = SubResource("RectangleShape2D_5ajby")
+
+[node name="ContainerComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(1899965660) index="0" unique_id=1003167593]
+script = ExtResource("4_si27c")
+interactable_type = 1

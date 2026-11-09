@@ -2,12 +2,70 @@
 
 [ext_resource type="PackedScene" uid="uid://ntkr54vda652" path="res://main/locations/location.tscn" id="1_mvck1"]
 [ext_resource type="PackedScene" uid="uid://bp0bgrum6vskd" path="res://main/entities/props/containers/chest_1.tscn" id="2_kef0p"]
+[ext_resource type="Script" uid="uid://dc13ymx1lufls" path="res://main/commands/command.gd" id="2_wdo1y"]
+[ext_resource type="Script" uid="uid://crkvw1kw00fdo" path="res://main/conditions/condition.gd" id="3_rejsv"]
+[ext_resource type="Resource" uid="uid://h7c2y35cv7tg" path="res://main/cutscenes/museum_cutscene.tres" id="4_fr7ov"]
+[ext_resource type="Script" uid="uid://dka0qx07s2x5d" path="res://main/conditions/is_flag_conditioin.gd" id="4_rejsv"]
+[ext_resource type="Script" uid="uid://c7vhtq1r5e5r2" path="res://main/commands/run_cutscene_command.gd" id="5_4pur8"]
+[ext_resource type="Script" uid="uid://dn6i02yqh3ha6" path="res://main/commands/command_set.gd" id="6_efnah"]
+[ext_resource type="Script" uid="uid://mwr8xq4ovru2" path="res://main/inventory/inventory.gd" id="9_4x53k"]
+[ext_resource type="Script" uid="uid://bcc12dwtx8mm6" path="res://main/items/item_stack.gd" id="10_s3cdu"]
+[ext_resource type="Resource" uid="uid://c1301sk3koo7m" path="res://resources/definitions/items/equipment/armor/leather_armor.tres" id="11_aoc1n"]
+[ext_resource type="Script" uid="uid://drv01ssi8daxb" path="res://main/items/item_data.gd" id="12_hgf3d"]
+[ext_resource type="PackedScene" uid="uid://buqbfuphq14qa" path="res://main/features/transition_sensor.tscn" id="13_s3cdu"]
+
+[sub_resource type="Resource" id="Resource_qw60f"]
+script = ExtResource("4_rejsv")
+key = "museum_cutscene"
+metadata/_custom_type_script = "uid://dka0qx07s2x5d"
+
+[sub_resource type="Resource" id="Resource_bdk2j"]
+script = ExtResource("5_4pur8")
+cutscene = ExtResource("4_fr7ov")
+conditions = Array[ExtResource("3_rejsv")]([SubResource("Resource_qw60f")])
+
+[sub_resource type="Resource" id="Resource_q3fgo"]
+script = ExtResource("6_efnah")
+commands = Array[ExtResource("2_wdo1y")]([SubResource("Resource_bdk2j")])
+metadata/_custom_type_script = "uid://dn6i02yqh3ha6"
+
+[sub_resource type="Resource" id="Resource_2fquc"]
+script = ExtResource("12_hgf3d")
+item = ExtResource("11_aoc1n")
+metadata/_custom_type_script = "uid://drv01ssi8daxb"
+
+[sub_resource type="Resource" id="Resource_na3yu"]
+script = ExtResource("10_s3cdu")
+item = ExtResource("11_aoc1n")
+item_data = SubResource("Resource_2fquc")
+count = 1
+metadata/_custom_type_script = "uid://bcc12dwtx8mm6"
+
+[sub_resource type="Resource" id="Resource_vbsf0"]
+script = ExtResource("9_4x53k")
+stacks = Array[ExtResource("10_s3cdu")]([SubResource("Resource_na3yu")])
+metadata/_custom_type_script = "uid://mwr8xq4ovru2"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aoc1n"]
+size = Vector2(20, 178)
 
 [node name="Museum" unique_id=1456950036 instance=ExtResource("1_mvck1")]
+open_command_set = SubResource("Resource_q3fgo")
 
 [node name="Chest1" parent="YSortRoot/PropRoot" parent_id_path=PackedInt32Array(1221054963) index="0" unique_id=215766784 instance=ExtResource("2_kef0p")]
 position = Vector2(420, 166)
 authored_id = 1522485497
+inventory = SubResource("Resource_vbsf0")
 
 [node name="Feature" parent="FeatureRoot" parent_id_path=PackedInt32Array(391647655) index="0" unique_id=1957927056]
 position = Vector2(292, 185)
+
+[node name="TransitionSensor" parent="FeatureRoot" parent_id_path=PackedInt32Array(391647655) index="1" unique_id=1346701615 instance=ExtResource("13_s3cdu")]
+location_id = &"null/null_1"
+spawn_point_id = &"start_spawn"
+
+[node name="CollisionShape2D" parent="FeatureRoot/TransitionSensor/Sensor" parent_id_path=PackedInt32Array(1346701615, 715008386) index="0" unique_id=25169364]
+position = Vector2(130, 119)
+shape = SubResource("RectangleShape2D_aoc1n")
+
+[editable path="FeatureRoot/TransitionSensor"]

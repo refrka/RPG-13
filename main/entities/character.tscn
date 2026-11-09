@@ -2,15 +2,18 @@
 
 [ext_resource type="Script" uid="uid://cvg7xorweo58v" path="res://main/entities/character.gd" id="1_u7xqv"]
 
-[node name="Character" type="CharacterBody2D" unique_id=1302027843 node_paths=PackedStringArray("component_root")]
+[node name="Character" type="CharacterBody2D" unique_id=1302027843 node_paths=PackedStringArray("component_root", "body_sprite")]
 collision_layer = 3
 collision_mask = 16
 script = ExtResource("1_u7xqv")
 component_root = NodePath("ComponentRoot")
+body_sprite = NodePath("BodySprite")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1809144018]
+[node name="BodySprite" type="Sprite2D" parent="." unique_id=1809144018]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2142657413]
 debug_color = Color(0, 0, 0, 0.16078432)
 
 [node name="ComponentRoot" type="Node" parent="." unique_id=1005418537]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=378461686]

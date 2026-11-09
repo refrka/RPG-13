@@ -33,13 +33,23 @@ var player: Player:
 
 			player = load("res://main/entities/player.tscn").instantiate()
 
-			player.initialize()
-
 			add_child(player)
 
 		return player
 
 var pause_count:= 0
+
+
+var camera: GameCamera:
+
+	get:
+
+		if not camera:
+
+			camera = get_tree().get_first_node_in_group("game_camera")
+
+		return camera
+
 
 
 
@@ -60,25 +70,34 @@ func _ready() -> void:
 
 
 
-
-
 func start() -> void:
+	
+	Scenes.main_menu.hide()
 
 	Events.fire(GameStartingEvent)
 
 	Data.load_save_data()
 
-	set_game_state(GameState.ACTIVE)
-
 	var location = Scenes.get_location_scene(Data.active_save_data.last_saved_dict.game_data.location_id)
 
 	Scenes.open_location(location)
 
+	player.initialize()
+
 	location.spawn_player(Data.active_save_data.spawn_point_id)
 
-	Game.player.activate()
+	AttachCameraToPlayerCommand.run()
 
-	Events.fire(GameStartedEvent)
+	Scenes.fade_in_complete.connect(_on_start_fade_in_complete.bind(location), CONNECT_ONE_SHOT)
+
+	Scenes.fade_in({ "rate": 1.0 })
+
+
+
+
+
+
+
 
 
 
@@ -97,6 +116,10 @@ func quit() -> void:
 func exit() -> void:
 
 	Events.fire(GameExitingEvent)
+
+	DetachCameraFromPlayerCommand.run()
+	
+	player.queue_free()
 
 	set_game_state(GameState.MAIN_MENU)
 
@@ -162,13 +185,6 @@ func request_unpause() -> void:
 
 
 
-func is_paused() -> bool:
-
-	return get_tree().paused and game_state == GameState.PAUSED
-
-
-
-
 
 func load_location(location_id: StringName) -> Location:
 
@@ -186,11 +202,21 @@ func load_location(location_id: StringName) -> Location:
 
 func change_location(location_id: StringName, spawn_point_id: StringName) -> void:
 
-	var location = load_location(location_id)
+	if Scenes.current_location and Scenes.current_location.location_id == location_id:
 
-	location.spawn_player(spawn_point_id)
+		return
 
-	player.activate()
+	Scenes.fade_out_complete.connect(_on_location_change_fade_out_complete.bind(location_id, spawn_point_id), CONNECT_ONE_SHOT)
+
+	Scenes.fade_out({ "rate": 1.0 })
+
+
+
+
+
+
+
+
 
 
 
@@ -204,16 +230,103 @@ func set_game_state(_game_state: GameState) -> void:
 
 
 
+
+
+
+
+
+
+func is_paused() -> bool:
+
+	return get_tree().paused and game_state == GameState.PAUSED
+
+
+
 func is_active() -> bool:
 
 	return game_state == GameState.ACTIVE
 
 
 
+func is_fading() -> bool:
+
+	if Scenes.fade_in_command_set and Scenes.fade_in_command_set.is_executing():
+
+		return true
+
+	if Scenes.fade_out_command_set and Scenes.fade_out_command_set.is_executing():
+
+		return true
+
+	return false
+
+
+
+
+
+
+
+
+func _on_location_change_fade_out_complete(location_id: StringName, spawn_point_id: StringName) -> void:
+
+	var location = load_location(location_id)
+
+	if location.open_command_set:
+
+		location.open_command_set.all_commands_executed.connect(_on_open_command_set_step_complete.bind(location, spawn_point_id), CONNECT_ONE_SHOT)
+
+		location.open_command_set.execute_all()
+
+	else:
+
+		_on_open_command_set_step_complete(location, spawn_point_id)
+
+
+
+
+
+func _on_open_command_set_step_complete(location: Location, spawn_point_id: StringName) -> void:
+
+	location.spawn_player(spawn_point_id)
+
+	Scenes.fade_in_complete.connect(_on_location_change_fade_in_complete.bind(location), CONNECT_ONE_SHOT)
+
+	Scenes.fade_in({ "rate": 1.0 })
+
+
+
+
+
+func _on_location_change_fade_in_complete(location: Location) -> void:
+
+	location.activate()
+
+
+
+
+func _on_start_fade_in_complete(location: Location) -> void:
+
+	set_game_state(GameState.ACTIVE)
+
+	location.activate()
+
+	if location.open_command_set:
+
+		location.open_command_set.execute_all()
+
+	Events.fire(GameStartedEvent)
+
+	
+
+
 
 
 func _unhandled_input(event: InputEvent) -> void:
 
-	if event.is_action_pressed("quicksave"):
+	if event.is_action_pressed("quicksave") and Inputs.is_action_allowed("quicksave"):
 
 		save()
+
+
+
+

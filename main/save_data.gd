@@ -14,7 +14,7 @@ class_name SaveData extends Resource
 
 @export var counters: Dictionary
 
-@export var location_id:= CurrentLocationIdGameValue.new()
+@export var location_id:= "null/null_1"
 
 @export var spawn_point_id:= "start_spawn"
 
@@ -34,11 +34,17 @@ func to_dict() -> Dictionary:
 
 			"last_save_unix": last_save_unix,
 
-			"location_id": location_id.get_value(),
+			"location_id": location_id,
 
 			"spawn_point_id": spawn_point_id,
 
-		}
+		},
+
+		"entities": [
+
+			Entities.to_dict()
+
+		]
 
 	}
 
@@ -54,7 +60,7 @@ static func from_dict(dict: Dictionary) -> SaveData:
 
 	save_data.last_saved_dict = dict
 
-	save_data.location_id = CurrentLocationIdGameValue.new(dict.game_data.location_id)
+	save_data.location_id = dict.game_data.location_id
 
 	save_data.spawn_point_id = dict.game_data.spawn_point_id
 

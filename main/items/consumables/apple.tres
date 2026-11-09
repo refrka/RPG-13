@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="Item" format=3 uid="uid://drkd403jx6uee"]
-
-[ext_resource type="Script" uid="uid://dofn50t5ps2jt" path="res://main/items/item.gd" id="1_b4o4a"]
-
-[resource]
-script = ExtResource("1_b4o4a")
-item_id = &"apple"
-display_name = "Apple"
-metadata/_custom_type_script = "uid://dofn50t5ps2jt"

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Weapon" format=3 uid="uid://o2srwn1n2au2"]
+
+[ext_resource type="Script" uid="uid://cjim1rvd76ufu" path="res://main/items/weapon.gd" id="1_v6i5c"]
+
+[resource]
+script = ExtResource("1_v6i5c")
+item_id = &"bow"
+display_name = "Bow"
+max_stack = 1
+metadata/_custom_type_script = "uid://cjim1rvd76ufu"

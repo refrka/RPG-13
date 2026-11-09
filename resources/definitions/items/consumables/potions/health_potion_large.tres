@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Consumable" format=3 uid="uid://d1suu7lbt4x2f"]
+
+[ext_resource type="Script" uid="uid://dvck6x2awsnsq" path="res://main/items/consumable.gd" id="1_ddvfo"]
+
+[resource]
+script = ExtResource("1_ddvfo")
+item_id = &"health_potion_large"
+display_name = "Large Health Potion"
+max_stack = 10
+metadata/_custom_type_script = "uid://dvck6x2awsnsq"

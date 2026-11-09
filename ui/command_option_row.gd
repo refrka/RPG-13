@@ -35,6 +35,12 @@ func get_data() -> Dictionary:
 
 			if value_line_edit.text.is_valid_float():
 
-				value = float(value_line_edit.float)
+				value = float(value_line_edit.text)
+
+		"BOOL":
+
+			if value_line_edit.text.is_valid_int():
+
+				value = bool(int(value_line_edit.text))
 
 	return { key_line_edit.text: value }

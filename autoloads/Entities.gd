@@ -3,9 +3,12 @@ extends Node
 
 
 
-var entity_registry: Dictionary[int, Variant]
+var entity_registry: Dictionary[int, Entity]
 
 var active_entities: Array[Entity]
+
+
+
 
 
 func _ready() -> void:
@@ -80,3 +83,17 @@ func generate_unique_id(entity: Entity) -> void:
 func is_unique_id_available(id: int) -> bool:
 
 	return not entity_registry.has(id)
+
+
+
+
+
+func to_dict() -> Dictionary:
+
+	var dict = {}
+
+	for entity in active_entities:
+
+		dict[entity.unique_id] = entity.to_dict()
+
+	return dict

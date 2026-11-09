@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Armor" format=3 uid="uid://c1301sk3koo7m"]
+
+[ext_resource type="Script" uid="uid://tuoef8gkgdmn" path="res://main/items/armor.gd" id="1_rhv7e"]
+[ext_resource type="Texture2D" uid="uid://bunagr6yn17ly" path="res://resources/textures/items/equipment/armor/leather_armor_icon_texture.png" id="1_vtd3o"]
+
+[resource]
+script = ExtResource("1_rhv7e")
+item_id = &"leather_armor"
+display_name = "Leather Armor"
+max_stack = 1
+icon_texture = ExtResource("1_vtd3o")

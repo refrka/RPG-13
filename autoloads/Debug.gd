@@ -33,6 +33,10 @@ func _ready() -> void:
 
 	for dir in ResourceLoader.list_directory(path):
 
+		if dir.ends_with("/"):
+
+			continue
+
 		var dir_path = path + dir
 
 		var object = load(dir_path)
@@ -58,7 +62,7 @@ func _ready() -> void:
 
 func _on_location_selected(location_id: StringName) -> void:
 
-	if Game.is_active():
+	if Game.is_active() and not Game.is_fading():
 
 		Game.change_location(location_id, "start_spawn")
 

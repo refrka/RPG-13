@@ -28,3 +28,17 @@ func deactivate() -> void:
 	active = false
 
 	
+
+
+
+
+func get_component_script() -> Script:
+
+	return get_script()
+
+
+
+
+func get_component_name() -> String:
+
+	return name.trim_suffix("Component")

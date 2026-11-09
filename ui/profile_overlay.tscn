@@ -3,12 +3,13 @@
 [ext_resource type="Script" uid="uid://bbmilkpu667pd" path="res://ui/profile_overlay.gd" id="1_e3pp2"]
 [ext_resource type="PackedScene" uid="uid://bawqfta0jhbw1" path="res://ui/inventory_grid.tscn" id="2_ihex5"]
 
-[node name="ProfileOverlay" type="MarginContainer" unique_id=467597025]
+[node name="ProfileOverlay" type="MarginContainer" unique_id=467597025 node_paths=PackedStringArray("inventory_grid")]
 anchors_preset = 9
 anchor_bottom = 1.0
 offset_right = 166.0
 grow_vertical = 2
 script = ExtResource("1_e3pp2")
+inventory_grid = NodePath("PanelContainer/MarginContainer/VBoxContainer/InventoryGrid")
 request_pause = true
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1430100171]
@@ -27,3 +28,4 @@ layout_mode = 2
 
 [node name="InventoryGrid" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=388392845 instance=ExtResource("2_ihex5")]
 layout_mode = 2
+size_flags_horizontal = 4

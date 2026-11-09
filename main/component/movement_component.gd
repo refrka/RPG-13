@@ -82,6 +82,16 @@ func get_face_dir() -> Vector2:
 
 
 
+func deactivate() -> void:
+
+	super()
+
+	entity.velocity = Vector2.ZERO
+
+
+
+
+
 
 
 func _physics_process(delta: float) -> void:

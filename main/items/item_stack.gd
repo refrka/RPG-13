@@ -189,3 +189,20 @@ static func new_stack(_item: Item, _item_data: ItemData = null, _count:= 1) -> I
 	return stack
 
 
+
+
+
+
+func to_dict() -> Dictionary:
+
+	var dict = {}
+
+	dict["item_id"] = item.item_id
+
+	dict["count"] = count
+
+	if item_data:
+
+		dict["item_data"] = item_data.to_dict()
+
+	return dict

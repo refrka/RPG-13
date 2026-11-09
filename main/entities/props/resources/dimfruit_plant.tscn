@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://c6gr5s2pgtsx0"]
+
+[ext_resource type="PackedScene" uid="uid://dnx1ucwubtesg" path="res://main/entities/prop.tscn" id="1_sw7mi"]
+[ext_resource type="Script" uid="uid://uxncuvjdw2xo" path="res://main/entities/entity_def.gd" id="2_36egn"]
+[ext_resource type="Texture2D" uid="uid://crmcd0p7nn7e3" path="res://resources/textures/props/resources/dimfruit_plant.png" id="2_qxhgg"]
+[ext_resource type="Texture2D" uid="uid://b6tl88h40i6ct" path="res://resources/textures/entity_shadow_med.png" id="3_36egn"]
+[ext_resource type="Script" uid="uid://cj6fxu8bejhff" path="res://main/component/harvest_component.gd" id="5_117gp"]
+[ext_resource type="Script" uid="uid://dofn50t5ps2jt" path="res://main/items/item.gd" id="6_g11hl"]
+[ext_resource type="Script" uid="uid://cpn4xbdhm5j84" path="res://main/loot_tables/loot_table.gd" id="7_01ydu"]
+[ext_resource type="Resource" uid="uid://bb1h7facsrsdo" path="res://resources/definitions/items/consumables/food/dimfruit.tres" id="7_tr4oc"]
+[ext_resource type="Resource" uid="uid://dlyp43tip4mu0" path="res://resources/definitions/items/material/seeds.tres" id="8_tr4oc"]
+
+[sub_resource type="Resource" id="Resource_g5f3m"]
+script = ExtResource("2_36egn")
+entity_id = &"dimfruit_plant"
+metadata/_custom_type_script = "uid://uxncuvjdw2xo"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_runjp"]
+size = Vector2(14, 9)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_117gp"]
+size = Vector2(18, 6)
+
+[sub_resource type="Resource" id="Resource_117gp"]
+script = ExtResource("7_01ydu")
+item_odds = Dictionary[ExtResource("6_g11hl"), float]({
+ExtResource("7_tr4oc"): 1.0,
+ExtResource("8_tr4oc"): 0.5
+})
+metadata/_custom_type_script = "uid://cpn4xbdhm5j84"
+
+[node name="DimfruitPlant" unique_id=215766784 node_paths=PackedStringArray("body_sprite") instance=ExtResource("1_sw7mi")]
+entity_def = SubResource("Resource_g5f3m")
+body_sprite = NodePath("BodySprite")
+
+[node name="ShadowSprite" parent="." index="0" unique_id=286161059]
+modulate = Color(0, 0, 0, 0.5058824)
+texture = ExtResource("3_36egn")
+
+[node name="BodySprite" parent="." index="1" unique_id=1791172789]
+texture = ExtResource("2_qxhgg")
+offset = Vector2(0, -16)
+
+[node name="CollisionShape2D" parent="." index="2" unique_id=1929450902]
+position = Vector2(0, -10.5)
+shape = SubResource("RectangleShape2D_runjp")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." index="3" unique_id=1746768991]
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_117gp")
+debug_color = Color(0, 0, 0, 0.16078432)
+
+[node name="HarvestComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(1899965660) index="0" unique_id=1758150696]
+script = ExtResource("5_117gp")
+loot_table = SubResource("Resource_117gp")
+metadata/_custom_type_script = "uid://cj6fxu8bejhff"

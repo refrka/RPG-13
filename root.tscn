@@ -2,11 +2,20 @@
 
 [ext_resource type="Script" uid="uid://dljnsps5orcrb" path="res://root.gd" id="1_pq8q7"]
 [ext_resource type="Script" uid="uid://c6w76b5n53o5f" path="res://main/config/input_config.gd" id="2_28aoi"]
-[ext_resource type="Script" uid="uid://bd74i4aa3swdw" path="res://main/locations/location.gd" id="2_pyidc"]
+[ext_resource type="Script" uid="uid://dc13ymx1lufls" path="res://main/commands/command.gd" id="3_qw60f"]
 [ext_resource type="PackedScene" uid="uid://bjkas7eq2d4el" path="res://ui/main_menu.tscn" id="3_vvh5c"]
+[ext_resource type="Script" uid="uid://crkvw1kw00fdo" path="res://main/conditions/condition.gd" id="4_eji0w"]
 [ext_resource type="PackedScene" uid="uid://bp2l3wl1ep8jc" path="res://ui/profile_overlay.tscn" id="4_vyht1"]
+[ext_resource type="Script" uid="uid://dhs5lincwvmjp" path="res://main/commands/fade_fg_command.gd" id="5_qwhpj"]
 [ext_resource type="PackedScene" uid="uid://cq67bfaokqhs6" path="res://ui/game_menu.tscn" id="5_vyht1"]
 [ext_resource type="PackedScene" uid="uid://dqmjtv7papiqt" path="res://ui/debug_screen.tscn" id="6_l8v81"]
+[ext_resource type="Script" uid="uid://k6ybirdyur5o" path="res://main/commands/delay_timer_command.gd" id="6_qt76e"]
+[ext_resource type="Script" uid="uid://dn6i02yqh3ha6" path="res://main/commands/command_set.gd" id="7_sq7yr"]
+[ext_resource type="PackedScene" uid="uid://bawqfta0jhbw1" path="res://ui/inventory_grid.tscn" id="9_eji0w"]
+[ext_resource type="Script" uid="uid://jh10qvyotms7" path="res://ui/container_overlay.gd" id="9_sq7yr"]
+[ext_resource type="Script" uid="uid://k7qi2psfdn4y" path="res://main/game_camera.gd" id="13_eji0w"]
+[ext_resource type="PackedScene" uid="uid://bmv4vqsxv7fat" path="res://ui/item_slot.tscn" id="13_qwhpj"]
+[ext_resource type="Script" uid="uid://b5mu3sf3a6by8" path="res://ui/cursor_slot.gd" id="14_qt76e"]
 
 [sub_resource type="Resource" id="Resource_aajxx"]
 script = ExtResource("2_28aoi")
@@ -16,18 +25,83 @@ metadata/_custom_type_script = "uid://c6w76b5n53o5f"
 [sub_resource type="Resource" id="Resource_bg5s2"]
 script = ExtResource("2_28aoi")
 game_state = 1
-allowed_actions = Array[StringName]([&"quicksave", &"debug", &"game_menu", &"move_left", &"move_right", &"move_up", &"move_down", &"profile"])
+allowed_actions = Array[StringName]([&"quicksave", &"debug", &"game_menu", &"move_left", &"move_right", &"move_up", &"move_down", &"profile", &"interact"])
 metadata/_custom_type_script = "uid://c6w76b5n53o5f"
 
 [sub_resource type="Resource" id="Resource_cpvfl"]
 script = ExtResource("2_28aoi")
 game_state = 3
-allowed_actions = Array[StringName]([&"game_menu", &"debug", &"profile"])
+allowed_actions = Array[StringName]([&"game_menu", &"debug", &"profile", &"interact"])
 metadata/_custom_type_script = "uid://c6w76b5n53o5f"
 
-[node name="Root" type="Node" unique_id=1437999846]
+[sub_resource type="Resource" id="Resource_bf3um"]
+script = ExtResource("2_28aoi")
+game_state = 2
+allowed_actions = Array[StringName]([&"end_cutscene", &"debug"])
+metadata/_custom_type_script = "uid://c6w76b5n53o5f"
+
+[sub_resource type="Resource" id="Resource_r3r3k"]
+script = ExtResource("5_qwhpj")
+metadata/_custom_type_script = "uid://dhs5lincwvmjp"
+
+[sub_resource type="Resource" id="Resource_huihk"]
+script = ExtResource("6_qt76e")
+duration = 0.0
+metadata/_custom_type_script = "uid://k6ybirdyur5o"
+
+[sub_resource type="Resource" id="Resource_vyht1"]
+script = ExtResource("7_sq7yr")
+commands = Array[ExtResource("3_qw60f")]([SubResource("Resource_r3r3k"), SubResource("Resource_huihk")])
+metadata/_custom_type_script = "uid://dn6i02yqh3ha6"
+
+[sub_resource type="Resource" id="Resource_eji0w"]
+script = ExtResource("5_qwhpj")
+fade_out = false
+rate = 0.5
+metadata/_custom_type_script = "uid://dhs5lincwvmjp"
+
+[sub_resource type="Resource" id="Resource_qw60f"]
+script = ExtResource("7_sq7yr")
+commands = Array[ExtResource("3_qw60f")]([SubResource("Resource_eji0w")])
+metadata/_custom_type_script = "uid://dn6i02yqh3ha6"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qt76e"]
+bg_color = Color(0.1, 0.1, 0.1, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.36, 0.36, 0.36, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sq7yr"]
+bg_color = Color(0.1, 0.1, 0.1, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.1575532, 0.1575532, 0.1575532, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r3r3k"]
+bg_color = Color(0.1, 0.1, 0.1, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.1575532, 0.1575532, 0.1575532, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_blcw0"]
+bg_color = Color(0.1, 0.1, 0.1, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.1575532, 0.1575532, 0.1575532, 1)
+
+[node name="Root" type="Node" unique_id=1437999846 groups=["root"]]
 script = ExtResource("1_pq8q7")
-input_configs = Array[ExtResource("2_28aoi")]([SubResource("Resource_aajxx"), SubResource("Resource_bg5s2"), SubResource("Resource_cpvfl")])
+input_configs = Array[ExtResource("2_28aoi")]([SubResource("Resource_aajxx"), SubResource("Resource_bg5s2"), SubResource("Resource_cpvfl"), SubResource("Resource_bf3um")])
+fade_out_command_set = SubResource("Resource_vyht1")
+fade_in_command_set = SubResource("Resource_qw60f")
 
 [node name="BGCanvas" type="CanvasLayer" parent="." unique_id=1198601177]
 
@@ -52,6 +126,75 @@ mouse_filter = 2
 color = Color(0.079195715, 0.07919573, 0.079195715, 1)
 metadata/_edit_use_anchors_ = true
 
+[node name="WorldCanvas" type="CanvasLayer" parent="." unique_id=457714724]
+follow_viewport_enabled = true
+
+[node name="WorldRoot" type="Node2D" parent="WorldCanvas" unique_id=147034532 groups=["world_root"]]
+
+[node name="CutsceneCanvas" type="CanvasLayer" parent="." unique_id=1827993187]
+
+[node name="CutsceneRoot" type="Node2D" parent="CutsceneCanvas" unique_id=960201681 groups=["cutscene_root"]]
+
+[node name="HUDCanvas" type="CanvasLayer" parent="." unique_id=569722603]
+
+[node name="HUDRoot" type="Control" parent="HUDCanvas" unique_id=2038639788]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ProfileOverlay" parent="HUDCanvas/HUDRoot" unique_id=467597025 instance=ExtResource("4_vyht1")]
+visible = false
+layout_mode = 1
+
+[node name="OverlayCanvas" type="CanvasLayer" parent="." unique_id=1361021598]
+follow_viewport_enabled = true
+
+[node name="OverlayRoot" type="Control" parent="OverlayCanvas" unique_id=110473599]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ContainerOverlay" type="MarginContainer" parent="OverlayCanvas/OverlayRoot" unique_id=1769181750 node_paths=PackedStringArray("inventory_grid")]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 0
+offset_right = 100.0
+offset_bottom = 100.0
+script = ExtResource("9_sq7yr")
+inventory_grid = NodePath("PanelContainer/MarginContainer/VBoxContainer/InventoryGrid")
+request_pause = true
+
+[node name="PanelContainer" type="PanelContainer" parent="OverlayCanvas/OverlayRoot/ContainerOverlay" unique_id=1281148770]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="OverlayCanvas/OverlayRoot/ContainerOverlay/PanelContainer" unique_id=347730438]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="OverlayCanvas/OverlayRoot/ContainerOverlay/PanelContainer/MarginContainer" unique_id=1171933414]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="OverlayCanvas/OverlayRoot/ContainerOverlay/PanelContainer/MarginContainer/VBoxContainer" unique_id=530718881]
+layout_mode = 2
+text = "Container"
+
+[node name="HSeparator" type="HSeparator" parent="OverlayCanvas/OverlayRoot/ContainerOverlay/PanelContainer/MarginContainer/VBoxContainer" unique_id=402633287]
+layout_mode = 2
+
+[node name="InventoryGrid" parent="OverlayCanvas/OverlayRoot/ContainerOverlay/PanelContainer/MarginContainer/VBoxContainer" unique_id=388392845 instance=ExtResource("9_eji0w")]
+layout_mode = 2
+size_flags_horizontal = 4
+
 [node name="FGCanvas" type="CanvasLayer" parent="." unique_id=1804793333]
 
 [node name="FGRoot" type="Control" parent="FGCanvas" unique_id=1080788272]
@@ -75,26 +218,6 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
-
-[node name="WorldCanvas" type="CanvasLayer" parent="." unique_id=457714724]
-
-[node name="WorldRoot" type="Node2D" parent="WorldCanvas" unique_id=147034532 groups=["world_root"]]
-
-[node name="Location" type="Node2D" parent="WorldCanvas/WorldRoot" unique_id=293705955]
-script = ExtResource("2_pyidc")
-
-[node name="OverlayCanvas" type="CanvasLayer" parent="." unique_id=1361021598]
-
-[node name="OverlayRoot" type="Control" parent="OverlayCanvas" unique_id=110473599]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ProfileOverlay" parent="OverlayCanvas/OverlayRoot" unique_id=467597025 instance=ExtResource("4_vyht1")]
-layout_mode = 1
 
 [node name="MainMenuCanvas" type="CanvasLayer" parent="." unique_id=91570870]
 
@@ -143,3 +266,28 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 grow_horizontal = 1
 grow_vertical = 1
+
+[node name="CursorCanvas" type="CanvasLayer" parent="." unique_id=1893681516]
+
+[node name="CursorRoot" type="Control" parent="CursorCanvas" unique_id=1110863549]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+
+[node name="CursorSlot" parent="CursorCanvas/CursorRoot" unique_id=206591642 instance=ExtResource("13_qwhpj")]
+layout_mode = 0
+mouse_filter = 2
+script = ExtResource("14_qt76e")
+default_stylebox = SubResource("StyleBoxFlat_qt76e")
+hovered_stylebox = SubResource("StyleBoxFlat_sq7yr")
+selected_stylebox = SubResource("StyleBoxFlat_r3r3k")
+hovered_selected_stylebox = SubResource("StyleBoxFlat_blcw0")
+metadata/_edit_lock_ = true
+
+[node name="PanelContainer" parent="CursorCanvas/CursorRoot/CursorSlot" index="0" unique_id=1372718727]
+theme_override_styles/panel = SubResource("StyleBoxFlat_qt76e")
+
+[node name="GameCamera" type="Camera2D" parent="." unique_id=1777281735 groups=["game_camera"]]
+script = ExtResource("13_eji0w")
+
+[editable path="CursorCanvas/CursorRoot/CursorSlot"]

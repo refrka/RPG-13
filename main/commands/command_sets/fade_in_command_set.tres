@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CommandSet" format=3 uid="uid://brv8sgksin13b"]
+
+[ext_resource type="Script" uid="uid://dc13ymx1lufls" path="res://main/commands/command.gd" id="1_ummcw"]
+[ext_resource type="Script" uid="uid://crkvw1kw00fdo" path="res://main/conditions/condition.gd" id="2_epko4"]
+[ext_resource type="Script" uid="uid://dn6i02yqh3ha6" path="res://main/commands/command_set.gd" id="2_vgv5n"]
+[ext_resource type="Script" uid="uid://dhs5lincwvmjp" path="res://main/commands/fade_fg_command.gd" id="3_qvusw"]
+
+[sub_resource type="Resource" id="Resource_epko4"]
+script = ExtResource("3_qvusw")
+fade_out = false
+rate = 0.5
+metadata/_custom_type_script = "uid://dhs5lincwvmjp"
+
+[resource]
+script = ExtResource("2_vgv5n")
+commands = Array[ExtResource("1_ummcw")]([SubResource("Resource_epko4")])
+metadata/_custom_type_script = "uid://dn6i02yqh3ha6"

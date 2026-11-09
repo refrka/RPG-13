@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://dlyp43tip4mu0"]
+
+[ext_resource type="Texture2D" uid="uid://li7se8ftfajd" path="res://resources/textures/items/material/seeds_icon.png" id="1_47t51"]
+[ext_resource type="Script" uid="uid://dofn50t5ps2jt" path="res://main/items/item.gd" id="2_omne7"]
+
+[resource]
+script = ExtResource("2_omne7")
+item_id = &"seeds"
+display_name = "Seeds"
+icon_texture = ExtResource("1_47t51")
+metadata/_custom_type_script = "uid://dofn50t5ps2jt"

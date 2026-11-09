@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://b3km000shhdio"]
+
+[ext_resource type="Script" uid="uid://88ld1jedhsii" path="res://main/entities/pickup.gd" id="1_307r8"]
+[ext_resource type="Script" uid="uid://uxncuvjdw2xo" path="res://main/entities/entity_def.gd" id="2_cgqcj"]
+[ext_resource type="Script" uid="uid://compp8uj12amx" path="res://main/sensor/sensor.gd" id="2_in7cj"]
+[ext_resource type="Texture2D" uid="uid://bsdbjri4r3s16" path="res://resources/textures/entity_shadow_small.png" id="3_cgqcj"]
+
+[sub_resource type="Resource" id="Resource_cgqcj"]
+script = ExtResource("2_cgqcj")
+entity_id = &"Pickup"
+metadata/_custom_type_script = "uid://uxncuvjdw2xo"
+
+[sub_resource type="Animation" id="Animation_cgqcj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BodySprite:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_tb2e8"]
+resource_name = "hover"
+length = 1.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BodySprite:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-5.0, -3.0, -5.0, -7.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ejhg5"]
+_data = {
+&"RESET": SubResource("Animation_cgqcj"),
+&"hover": SubResource("Animation_tb2e8")
+}
+
+[node name="Pickup" type="StaticBody2D" unique_id=488817388 node_paths=PackedStringArray("body_sprite")]
+script = ExtResource("1_307r8")
+entity_def = SubResource("Resource_cgqcj")
+body_sprite = NodePath("BodySprite")
+
+[node name="ShadowSprite" type="Sprite2D" parent="." unique_id=15506776]
+modulate = Color(0, 0, 0, 0.4)
+texture = ExtResource("3_cgqcj")
+
+[node name="BodySprite" type="Sprite2D" parent="." unique_id=1077414123]
+
+[node name="Sensor" type="Area2D" parent="." unique_id=542888604]
+script = ExtResource("2_in7cj")
+metadata/_custom_type_script = "uid://compp8uj12amx"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sensor" unique_id=1669961573]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=606729337]
+libraries/ = SubResource("AnimationLibrary_ejhg5")
+autoplay = &"hover"

@@ -84,7 +84,13 @@ func get_move_dir() -> Vector2:
 
 		return Vector2.ZERO
 
-	input_dir = dir.normalized()
+	if entity.velocity == Vector2.ZERO:
+
+		input_dir = dir
+
+	else:
+
+		input_dir = input_dir.move_toward(dir, 0.2)
 
 	return input_dir
 

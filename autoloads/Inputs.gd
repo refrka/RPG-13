@@ -77,7 +77,7 @@ func disable_action(action: StringName) -> void:
 
 func get_allowed_actions() -> Array:
 
-	var allowed = enabled_actions
+	var allowed = enabled_actions.duplicate()
 
 	for action in current_input_config.allowed_actions:
 
@@ -109,6 +109,10 @@ func _on_game_state_changed(game_state: Game.GameState) -> void:
 func _input(event: InputEvent) -> void:
 
 	if event is InputEventKey:
+
+		if get_viewport().gui_get_focus_owner() is LineEdit:
+
+			return
 
 		for action in get_allowed_actions():
 

@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://n2v0mlu07jwj"]
+
+[ext_resource type="PackedScene" uid="uid://bmv4vqsxv7fat" path="res://ui/item_slot.tscn" id="1_j881m"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qx03j"]
+bg_color = Color(0.09638945, 0.09638945, 0.09638945, 1)
+draw_center = false
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.27, 0.27, 0.27, 0)
+
+[node name="CursorRoot" type="Control" unique_id=1115055263 groups=["cursor_root"]]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 0
+
+[node name="CursorSlot" parent="." unique_id=206591642 instance=ExtResource("1_j881m")]
+layout_mode = 0
+mouse_filter = 2
+script = null
+
+[node name="PanelContainer" parent="CursorSlot" index="0" unique_id=1372718727]
+theme_override_styles/panel = SubResource("StyleBoxFlat_qx03j")
+
+[editable path="CursorSlot"]

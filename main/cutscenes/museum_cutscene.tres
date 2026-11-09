@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Cutscene" format=3 uid="uid://h7c2y35cv7tg"]
+
+[ext_resource type="Script" uid="uid://dc13ymx1lufls" path="res://main/commands/command.gd" id="1_64yql"]
+[ext_resource type="Script" uid="uid://cvslaqkc737lk" path="res://main/cutscenes/cutscene.gd" id="1_q3fgo"]
+[ext_resource type="Script" uid="uid://crkvw1kw00fdo" path="res://main/conditions/condition.gd" id="2_7jxv3"]
+[ext_resource type="Script" uid="uid://dhs5lincwvmjp" path="res://main/commands/fade_fg_command.gd" id="3_7jxv3"]
+[ext_resource type="Script" uid="uid://dn6i02yqh3ha6" path="res://main/commands/command_set.gd" id="4_wjol7"]
+
+[sub_resource type="Resource" id="Resource_bf3um"]
+script = ExtResource("3_7jxv3")
+fade_out = false
+rate = 0.5
+metadata/_custom_type_script = "uid://dhs5lincwvmjp"
+
+[sub_resource type="Resource" id="Resource_4x53k"]
+script = ExtResource("4_wjol7")
+commands = Array[ExtResource("1_64yql")]([SubResource("Resource_bf3um")])
+metadata/_custom_type_script = "uid://dn6i02yqh3ha6"
+
+[resource]
+script = ExtResource("1_q3fgo")
+cutscene_id = &"museum_cutscene"
+location_id = &"forest/forest_1"
+command_set = SubResource("Resource_4x53k")
+metadata/_custom_type_script = "uid://cvslaqkc737lk"

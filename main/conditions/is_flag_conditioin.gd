@@ -5,6 +5,8 @@ class_name IsFlagCondition extends Condition
 
 @export var value: int
 
+@export var default: int
+
 
 
 func evaluate(_data:= {}) -> bool:
@@ -18,5 +20,9 @@ func evaluate(_data:= {}) -> bool:
 	if data.has("value"):
 
 		value = data.value
+
+	if data.has("default"):
+
+		default = data.default
 
 	return Data.get_flag(key) == value

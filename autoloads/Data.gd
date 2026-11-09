@@ -122,7 +122,7 @@ func set_flag(key: String, value: Variant) -> void:
 
 
 
-func get_flag(key: String, default: Variant = null) -> Variant:
+func get_flag(key: String, default: Variant = 0) -> Variant:
 
 	if active_save_data.flags.has(key):
 

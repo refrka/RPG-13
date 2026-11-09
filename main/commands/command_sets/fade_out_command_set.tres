@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="CommandSet" format=3 uid="uid://dfepha0grnucv"]
+
+[ext_resource type="Script" uid="uid://dc13ymx1lufls" path="res://main/commands/command.gd" id="1_wt1u1"]
+[ext_resource type="Script" uid="uid://dn6i02yqh3ha6" path="res://main/commands/command_set.gd" id="2_n1tu0"]
+[ext_resource type="Script" uid="uid://crkvw1kw00fdo" path="res://main/conditions/condition.gd" id="2_o2niy"]
+[ext_resource type="Script" uid="uid://dhs5lincwvmjp" path="res://main/commands/fade_fg_command.gd" id="3_ywpbs"]
+[ext_resource type="Script" uid="uid://k6ybirdyur5o" path="res://main/commands/delay_timer_command.gd" id="4_3fj2b"]
+
+[sub_resource type="Resource" id="Resource_ml8pr"]
+script = ExtResource("3_ywpbs")
+metadata/_custom_type_script = "uid://dhs5lincwvmjp"
+
+[sub_resource type="Resource" id="Resource_o2niy"]
+script = ExtResource("4_3fj2b")
+metadata/_custom_type_script = "uid://k6ybirdyur5o"
+
+[resource]
+script = ExtResource("2_n1tu0")
+commands = Array[ExtResource("1_wt1u1")]([SubResource("Resource_ml8pr"), SubResource("Resource_o2niy")])
+metadata/_custom_type_script = "uid://dn6i02yqh3ha6"

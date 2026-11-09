@@ -30,6 +30,8 @@ func cancel() -> void:
 
 	if active_command:
 
+		active_command.command_executed.disconnect(_on_command_executed)
+
 		active_command.cancel()
 
 
@@ -48,9 +50,17 @@ func get_command(index: int) -> Command:
 
 func execute_command_index(index: int) -> void:
 
-	var command = get_command(command_index)
+	var command = get_command(index)
 
-	if not command or not command.can_execute(data):
+	if not command:
+
+		return
+
+	if not command.can_execute(data):
+
+		command_index += 1
+
+		_on_command_executed(Command.Result.FAILURE, command)
 
 		return
 
@@ -66,11 +76,11 @@ func execute_command_index(index: int) -> void:
 
 		Command.Result.SUCCESS:
 
-			_on_command_executed(active_command)
+			_on_command_executed(Command.Result.SUCCESS, active_command)
 
 		Command.Result.FAILURE:
 
-			pass
+			_on_command_executed(Command.Result.FAILURE, active_command)
 
 
 
@@ -79,6 +89,10 @@ func is_executing() -> bool:
 	return active_command != null
 
 
+
+func is_index_valid(index: int) -> bool:
+
+	return commands.size() - 1 >= index
 
 
 
@@ -93,7 +107,11 @@ func _on_command_conditions_false() -> void:
 
 
 
-func _on_command_executed(command: Command) -> void:
+func _on_command_executed(_result: Command.Result, command: Command) -> void:
+
+	if active_command and active_command.command_cancelled.is_connected(_on_command_cancelled):
+	
+		active_command.command_cancelled.disconnect(_on_command_cancelled)
 
 	active_command = null
 
@@ -101,7 +119,13 @@ func _on_command_executed(command: Command) -> void:
 
 	command_index += 1
 
-	execute_command_index(command_index)
+	if is_index_valid(command_index):
+
+		execute_command_index(command_index)
+
+	else:
+
+		all_commands_executed.emit()
 
 
 
@@ -109,3 +133,12 @@ func _on_command_executed(command: Command) -> void:
 func _on_command_cancelled() -> void:
 
 	active_command = null
+
+
+
+
+
+
+static func run(_commands: Array[Command]) -> CommandSet:
+
+	return null

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Tool" format=3 uid="uid://dh0ld5wokblgp"]
+
+[ext_resource type="Script" uid="uid://dpk885p8d8pn5" path="res://main/items/tool.gd" id="1_fngo0"]
+
+[resource]
+script = ExtResource("1_fngo0")
+item_id = &"shovel"
+display_name = "Shovel"
+max_stack = 1
+metadata/_custom_type_script = "uid://dpk885p8d8pn5"

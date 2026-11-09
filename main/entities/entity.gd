@@ -1,6 +1,8 @@
 class_name Entity extends PhysicsBody2D
 
 
+@export var persist:= false
+
 @export var authored_id:= -1
 
 @export var disabled:= false
@@ -10,6 +12,12 @@ class_name Entity extends PhysicsBody2D
 @export var inventory:= Inventory.new()
 
 @export var component_root: Node
+
+@export var body_sprite: Sprite2D
+
+
+
+var sensors: Array[Sensor]
 
 
 var initialized:= false
@@ -27,6 +35,25 @@ var entities_index:= -1
 
 
 
+func _init() -> void:
+
+	if not child_entered_tree.is_connected(_on_child_entered_entity_tree):
+
+		child_entered_tree.connect(_on_child_entered_entity_tree)
+
+
+
+
+func _on_child_entered_entity_tree(child: Node) -> void:
+
+	if child is Sensor:
+
+		register_sensor(child)
+
+
+
+
+
 func initialize() -> void:
 
 	if initialized:
@@ -36,6 +63,8 @@ func initialize() -> void:
 	initialized = true
 
 	Entities.register_entity(self)
+
+	sensors.map(func(s): s.initialize(self))
 
 	component_root.get_children().map(func(c): c.initialize(self))
 
@@ -73,6 +102,8 @@ func activate() -> void:
 
 	component_root.get_children().map(func(c): c.activate())
 
+	sensors.map(func(s): s.activate())
+
 
 
 func deactivate() -> void:
@@ -80,6 +111,8 @@ func deactivate() -> void:
 	active = false
 
 	component_root.get_children().map(func(c): c.deactivate())
+
+	sensors.map(func(s): s.deactivate())
 
 
 
@@ -131,3 +164,94 @@ func is_authored_id_available(id: int) -> bool:
 			return false
 
 	return true
+
+
+
+
+
+
+func register_sensor(sensor: Sensor) -> void:
+
+	if not sensors.has(sensor):
+
+		sensors.append(sensor)
+
+
+
+
+
+
+
+func create_reference() -> EntityRef:
+
+	var entity_ref = EntityRef.new()
+
+	entity_ref.authored_id = authored_id
+
+	entity_ref.unique_id = unique_id
+
+	entity_ref.entity_def = entity_def
+
+	entity_ref.entity_id = entity_def.entity_id
+
+	return entity_ref
+
+
+
+
+func get_component(component_script: Script) -> Component:
+
+	for component in component_root.get_children():
+
+		if component.get_component_script() == component_script:
+
+			return component
+
+	return null
+
+
+
+func get_interactable_component() -> InteractableComponent:
+
+	for component in component_root.get_children():
+
+		if component is InteractableComponent:
+
+			return component
+
+	return null
+
+
+
+func is_interactable() -> bool:
+
+	for component in component_root.get_children():
+
+		if component is InteractableComponent:
+
+			return true
+
+	return false
+
+
+
+
+
+
+func to_dict() -> Dictionary:
+
+	var dict = {}
+
+	if inventory:
+
+		dict["inventory"] = inventory.to_dict()
+
+	dict["components"] = {}
+
+	for component in component_root.get_children():
+
+		if component.has_method("to_dict"):
+
+			dict.components[component.get_component_name()] = component.to_dict()
+
+	return dict

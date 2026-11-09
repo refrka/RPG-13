@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://dxa7ltuy5us1a"]
+
+[ext_resource type="PackedScene" uid="uid://dnx1ucwubtesg" path="res://main/entities/prop.tscn" id="1_jimqv"]
+[ext_resource type="Script" uid="uid://uxncuvjdw2xo" path="res://main/entities/entity_def.gd" id="2_jaurr"]
+[ext_resource type="Texture2D" uid="uid://hmbc6ptej7fp" path="res://resources/textures/props/furnishings/campfire_sprite_texture.png" id="2_o04hk"]
+[ext_resource type="Script" uid="uid://ckoedjq3quy6j" path="res://main/component/spawn_point_component.gd" id="4_j6ucl"]
+
+[sub_resource type="Resource" id="Resource_gp0mv"]
+script = ExtResource("2_jaurr")
+entity_id = &"campfire"
+metadata/_custom_type_script = "uid://uxncuvjdw2xo"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jaurr"]
+size = Vector2(20, 4)
+
+[sub_resource type="Animation" id="Animation_o04hk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jaurr"]
+_data = {
+&"RESET": SubResource("Animation_o04hk")
+}
+
+[sub_resource type="Animation" id="Animation_j6ucl"]
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ynln3"]
+_data = {
+&"idle": SubResource("Animation_j6ucl")
+}
+
+[node name="Campfire" unique_id=215766784 instance=ExtResource("1_jimqv")]
+collision_layer = 53
+entity_def = SubResource("Resource_gp0mv")
+
+[node name="Sprite2D" parent="." index="0" unique_id=1791172789]
+texture = ExtResource("2_o04hk")
+offset = Vector2(0, -16)
+hframes = 3
+vframes = 2
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=1929450902]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_jaurr")
+
+[node name="SpawnPointComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(1899965660) index="0" unique_id=373633479]
+script = ExtResource("4_j6ucl")
+spawn_point_id = &"campfire"
+metadata/_custom_type_script = "uid://ckoedjq3quy6j"
+
+[node name="AnimationPlayer" parent="." index="3" unique_id=1229111345]
+libraries/ = SubResource("AnimationLibrary_jaurr")
+libraries/campfire = SubResource("AnimationLibrary_ynln3")
+autoplay = &"campfire/idle"

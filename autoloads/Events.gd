@@ -51,3 +51,11 @@ func fire(event_script: Script, data:= {}) -> void:
 	event.data = data
 
 	event.fire()
+
+	if subscriptions.has(event_script):
+
+		for callback in subscriptions[event_script]:
+
+			if callback.is_valid():
+
+				callback.call(event)

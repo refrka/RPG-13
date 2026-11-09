@@ -1,8 +1,71 @@
 [gd_scene format=3 uid="uid://bmv4vqsxv7fat"]
 
-[node name="ItemSlot" type="MarginContainer" unique_id=206591642]
+[ext_resource type="Script" uid="uid://4lvgq61suh1b" path="res://ui/item_slot.gd" id="1_m0q4r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aajxx"]
+bg_color = Color(0.09638945, 0.09638945, 0.09638945, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.1575532, 0.1575532, 0.1575532, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m0q4r"]
+bg_color = Color(0.11, 0.11, 0.11, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.1575532, 0.1575532, 0.1575532, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lxngi"]
+bg_color = Color(0.09638945, 0.09638945, 0.09638945, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.49315637, 0.49315643, 0.49315637, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gpwhp"]
+bg_color = Color(0.11, 0.11, 0.11, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.49315637, 0.49315643, 0.49315637, 1)
+
+[node name="ItemSlot" type="MarginContainer" unique_id=206591642 node_paths=PackedStringArray("panel", "icon_texture_rect", "count_label")]
+process_mode = 3
 custom_minimum_size = Vector2(24, 24)
+script = ExtResource("1_m0q4r")
+panel = NodePath("PanelContainer")
+icon_texture_rect = NodePath("PanelContainer/MarginContainer/IconTextureRect")
+count_label = NodePath("PanelContainer/MarginContainer2/CountLabel")
+default_stylebox = SubResource("StyleBoxFlat_aajxx")
+hovered_stylebox = SubResource("StyleBoxFlat_m0q4r")
+selected_stylebox = SubResource("StyleBoxFlat_lxngi")
+hovered_selected_stylebox = SubResource("StyleBoxFlat_gpwhp")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1372718727]
 layout_mode = 2
+mouse_filter = 2
 theme_type_variation = &"ItemSlotPanel"
+theme_override_styles/panel = SubResource("StyleBoxFlat_aajxx")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1337588952]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="IconTextureRect" type="TextureRect" parent="PanelContainer/MarginContainer" unique_id=746631963]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer" unique_id=1300482342]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 2
+
+[node name="CountLabel" type="Label" parent="PanelContainer/MarginContainer2" unique_id=1356660332]
+layout_mode = 2
+size_flags_vertical = 8
+horizontal_alignment = 2
