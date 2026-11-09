@@ -15,6 +15,12 @@ class_name Entity extends PhysicsBody2D
 
 @export var body_sprite: Sprite2D
 
+@export var shadow_sprite: Sprite2D
+
+@export var anim_player: AnimationPlayer
+
+@export var center_marker: Marker2D
+
 
 
 var sensors: Array[Sensor]
@@ -66,7 +72,9 @@ func initialize() -> void:
 
 	sensors.map(func(s): s.initialize(self))
 
-	component_root.get_children().map(func(c): c.initialize(self))
+	if component_root:
+
+		component_root.get_children().map(func(c): c.initialize(self))
 
 	if inventory:
 
@@ -100,7 +108,9 @@ func activate() -> void:
 
 	active = true
 
-	component_root.get_children().map(func(c): c.activate())
+	if component_root:
+
+		component_root.get_children().map(func(c): c.activate())
 
 	sensors.map(func(s): s.activate())
 
@@ -110,7 +120,9 @@ func deactivate() -> void:
 
 	active = false
 
-	component_root.get_children().map(func(c): c.deactivate())
+	if component_root:
+
+		component_root.get_children().map(func(c): c.deactivate())
 
 	sensors.map(func(s): s.deactivate())
 

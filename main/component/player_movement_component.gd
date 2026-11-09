@@ -90,9 +90,9 @@ func get_move_dir() -> Vector2:
 
 	else:
 
-		input_dir = input_dir.move_toward(dir, 0.2)
+		input_dir = input_dir.move_toward(dir, 0.4)
 
-	return input_dir
+	return input_dir.normalized()
 
 
 

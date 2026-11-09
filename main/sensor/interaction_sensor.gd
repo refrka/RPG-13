@@ -26,7 +26,11 @@ func _on_body_entered_sensor(body: PhysicsBody2D) -> void:
 
 	if bodies.has(body) and body is Entity and body.is_interactable():
 
-		interactable_entities.append(body)
+		var interactable_component = body.get_interactable_component()
+
+		if interactable_component.can_interact():
+
+			interactable_entities.append(body)
 
 
 

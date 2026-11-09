@@ -49,6 +49,7 @@ metadata/_custom_type_script = "uid://mwr8xq4ovru2"
 size = Vector2(20, 10)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eji0w"]
+radius = 19.0
 
 [node name="Player" unique_id=1302027843 node_paths=PackedStringArray("interaction_sensor") groups=["player"] instance=ExtResource("1_ctsxe")]
 process_mode = 3
@@ -58,18 +59,15 @@ interaction_sensor = NodePath("InteractionSesnor")
 entity_def = SubResource("Resource_sa71d")
 inventory = SubResource("Resource_rnx6y")
 
-[node name="Sprite2D" parent="." index="0" unique_id=1809144018]
+[node name="BodySprite" parent="." index="1" unique_id=1809144018]
 texture = ExtResource("3_v2iwy")
 offset = Vector2(0, -24)
 hframes = 8
 vframes = 4
 
-[node name="CollisionShape2D" parent="." index="1" unique_id=2142657413]
+[node name="CollisionShape2D" parent="." index="2" unique_id=2142657413]
 position = Vector2(0, -5)
 shape = SubResource("RectangleShape2D_gk7iq")
-
-[node name="PlayerMovementComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(1005418537) index="0" unique_id=2089594901]
-script = ExtResource("4_k1fg7")
 
 [node name="InteractionSesnor" type="Area2D" parent="." index="3" unique_id=8566611]
 position = Vector2(0, -13)
@@ -80,3 +78,10 @@ metadata/_custom_type_script = "uid://compp8uj12amx"
 position = Vector2(8, 0)
 shape = SubResource("CircleShape2D_eji0w")
 debug_color = Color(0.7, 0.7, 0.7, 0.12156863)
+
+[node name="PlayerMovementComponent" type="Node" parent="ComponentRoot" parent_id_path=PackedInt32Array(1005418537) index="0" unique_id=2089594901]
+process_mode = 1
+script = ExtResource("4_k1fg7")
+
+[node name="CenterMarker" parent="." index="6" unique_id=624648309]
+position = Vector2(0, -13)

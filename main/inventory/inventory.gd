@@ -34,6 +34,36 @@ func initialize(_entity: Entity) -> void:
 
 
 
+
+func add_items(item: Item, amount:= 1) -> int:
+
+	var remaining = amount
+
+	for stack in get_stacks_with_item(item):
+
+		print("before stacking like: ", remaining)
+
+		remaining = stack.add_amount(remaining)
+
+		print("after stacking like: ", remaining)
+
+	var empty_index = get_first_empty_index()
+
+	while remaining > 0 and empty_index != -1:
+
+		var stack = ItemStack.new_stack(item, null, remaining)
+
+		remaining -= stack.count
+
+		set_stack_index(empty_index, stack)
+
+		empty_index = get_first_empty_index()
+
+	return remaining
+
+
+
+
 func resize(_size:= -1) -> void:
 
 	if _size < 0:

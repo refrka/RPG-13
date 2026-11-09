@@ -35,7 +35,11 @@ func try_interaction() -> void:
 
 		var nearest = interaction_sensor.interactable_entities.front()
 
-		start_interaction(nearest)
+		var interactable_component = nearest.get_interactable_component()
+
+		if interactable_component.can_interact():
+
+			start_interaction(nearest)
 
 
 

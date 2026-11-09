@@ -68,7 +68,7 @@ func add_amount(amount: int) -> int:
 
 	var new_count = count
 
-	if space <= remaining:
+	if space >= remaining:
 
 		new_count = count + remaining
 

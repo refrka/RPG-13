@@ -29,9 +29,8 @@ ExtResource("8_tr4oc"): 0.5
 })
 metadata/_custom_type_script = "uid://cpn4xbdhm5j84"
 
-[node name="DimfruitPlant" unique_id=215766784 node_paths=PackedStringArray("body_sprite") instance=ExtResource("1_sw7mi")]
+[node name="DimfruitPlant" unique_id=215766784 instance=ExtResource("1_sw7mi")]
 entity_def = SubResource("Resource_g5f3m")
-body_sprite = NodePath("BodySprite")
 
 [node name="ShadowSprite" parent="." index="0" unique_id=286161059]
 modulate = Color(0, 0, 0, 0.5058824)
@@ -40,6 +39,7 @@ texture = ExtResource("3_36egn")
 [node name="BodySprite" parent="." index="1" unique_id=1791172789]
 texture = ExtResource("2_qxhgg")
 offset = Vector2(0, -16)
+hframes = 2
 
 [node name="CollisionShape2D" parent="." index="2" unique_id=1929450902]
 position = Vector2(0, -10.5)

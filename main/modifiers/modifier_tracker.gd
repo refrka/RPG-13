@@ -48,7 +48,7 @@ func get_float_multiply() -> float:
 
 func get_float_add() -> float:
 
-	var float_total:= 1.0
+	var float_total:= 0.0
 
 	for modifier in modifiers:
 

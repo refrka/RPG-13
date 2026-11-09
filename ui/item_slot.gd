@@ -214,3 +214,5 @@ func update_visuals() -> void:
 	if not is_empty():
 
 		icon_texture_rect.texture = stack.item.icon_texture
+
+	count_label.text = str(stack.count) if stack and stack.count > 1 else ""

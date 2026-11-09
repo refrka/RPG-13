@@ -16,6 +16,8 @@ func load_inventory(_inventory: Inventory) -> void:
 
 	inventory = _inventory
 
+	inventory.index_updated.connect(_on_inventory_index_updated)
+
 	for stack in inventory.stacks:
 
 		var item_slot = add_item_slot()
@@ -55,7 +57,13 @@ func clear() -> void:
 
 
 
+func _on_inventory_index_updated(index: int, stack: ItemStack) -> void:
 
+	var item_slot = get_child(index)
+
+	if item_slot.stack != stack:
+
+		item_slot.set_stack(stack)
 
 
 
