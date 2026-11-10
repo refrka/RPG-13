@@ -191,6 +191,24 @@ static func new_stack(_item: Item, _item_data: ItemData = null, _count:= 1) -> I
 
 
 
+static func from_dict(dict: Dictionary) -> ItemStack:
+
+	var stack = ItemStack.new()
+
+	var _item = Items.get_item(dict.item_id)
+
+	stack.item = _item
+
+	stack.count = int(dict.count)
+
+	if dict.has("item_data"):
+
+		stack.item_data = ItemData.from_dict(dict.item_data)
+
+	return stack
+
+
+
 
 
 func to_dict() -> Dictionary:
@@ -206,3 +224,8 @@ func to_dict() -> Dictionary:
 		dict["item_data"] = item_data.to_dict()
 
 	return dict
+
+
+
+
+

@@ -14,8 +14,20 @@ func initialize() -> void:
 
 	super()
 
+	inventory.initialize(self)
+
+	inventory.load_dict(Data.active_save_data.last_saved_dict.player_data.inventory)
+
 	Events.fire(PlayerInitializedEvent)
 
+
+
+
+func reset() -> void:
+
+	inventory = entity_def.initial_inventory.duplicate()
+
+	initialized = false
 
 
 

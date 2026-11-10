@@ -40,6 +40,12 @@ func to_dict() -> Dictionary:
 
 		},
 
+		"player_data": {
+
+			"inventory":                                                   ,
+
+		},
+
 		"entities": [
 
 			Entities.to_dict()

@@ -17,7 +17,7 @@ func initialize(_entity: Entity) -> void:
 
 	resize(size)
 
-	if entity.entity_def.initial_inventory:
+	if entity.entity_def.initial_inventory and not entity is Player:
 
 		merge_inventory(entity.entity_def.initial_inventory)
 
@@ -35,17 +35,23 @@ func initialize(_entity: Entity) -> void:
 
 
 
+func clear() -> void:
+
+	stacks.clear()
+
+	resize()
+
+
+
+
+
 func add_items(item: Item, amount:= 1) -> int:
 
 	var remaining = amount
 
 	for stack in get_stacks_with_item(item):
 
-		print("before stacking like: ", remaining)
-
 		remaining = stack.add_amount(remaining)
-
-		print("after stacking like: ", remaining)
 
 	var empty_index = get_first_empty_index()
 
@@ -60,7 +66,6 @@ func add_items(item: Item, amount:= 1) -> int:
 		empty_index = get_first_empty_index()
 
 	return remaining
-
 
 
 
@@ -207,6 +212,29 @@ func to_dict() -> Dictionary:
 
 	for stack in stacks:
 
-		dict.items.append(stack.to_dict())
+		if stack:
+
+			dict.items.append(stack.to_dict())
+
+		else:
+
+			dict.items.append({})
 
 	return dict
+
+
+
+
+func load_dict(dict: Dictionary) -> void:
+
+	for stack_dict in dict.items:
+
+		if stack_dict.is_empty():
+
+			stacks.append(null)
+
+		else:
+
+			var stack = ItemStack.from_dict(stack_dict)
+
+			stacks.append(stack)

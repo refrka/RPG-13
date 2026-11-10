@@ -103,6 +103,8 @@ func start() -> void:
 
 func reset() -> void:
 
+	player.reset()
+
 	Data.create_new_save_data()
 
 
@@ -110,6 +112,7 @@ func reset() -> void:
 func quit() -> void:
 
 	get_tree().quit()
+
 
 
 

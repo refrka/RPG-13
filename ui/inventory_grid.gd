@@ -26,6 +26,7 @@ func load_inventory(_inventory: Inventory) -> void:
 
 
 
+
 func add_item_slot() -> ItemSlot:
 
 	var item_slot = item_slot_scene.instantiate()

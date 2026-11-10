@@ -76,7 +76,7 @@ func initialize() -> void:
 
 		component_root.get_children().map(func(c): c.initialize(self))
 
-	if inventory:
+	if inventory and not self is Player:
 
 		inventory = inventory.duplicate(true)
 
